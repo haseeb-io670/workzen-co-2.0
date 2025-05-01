@@ -2,9 +2,13 @@ import { useState } from 'react'
 import './App.css'
 import Header from './components/layout/header'
 import Footer from './components/layout/footer'
+import router from './routes/index';
+import { RouterProvider } from 'react-router-dom'
 
 function App() {
   return (
+    <RouterProvider router={router}>
+
     <div className="app">
       <Header />
       
@@ -63,6 +67,7 @@ function App() {
 
       <Footer />
     </div>
+    </RouterProvider>
   )
 }
 
