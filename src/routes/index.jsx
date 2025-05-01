@@ -1,15 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-import Test from "../Test";
+import Home from "../pages/Home.jsx";
+import Services from "../pages/Services.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     index:true,
-    element: <Test />
+    element: <Home />
   },
   {
-    path: "/admin",
-    // element: <AdminLayout></AdminLayout>,
+    path: "/services",
+    element: <Services />,
     children: [
       {
         index:true,
