@@ -69,10 +69,10 @@ const Header = () => {
         <nav className={`main-navigation ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
           <ul className="nav-list">
             <li className="nav-item">
-              <a href="/" className="nav-link active">Home</a>
+              <a href="/" className="nav-link">Home</a>
             </li>
             <li className="nav-item">
-              <a href="/about" className="nav-link">About</a>
+              <a href="/about-us" className="nav-link">About</a>
             </li>
             <li className={`nav-item dropdown ${isServicesDropdownOpen ? 'open' : ''}`} ref={servicesDropdownRef}>
               <a 

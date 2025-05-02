@@ -5,7 +5,7 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 0.8rem 0;
+  padding: 1rem 0;
   transition: all 0.3s ease;
   background-color: var(--color-dark);
   
@@ -251,6 +251,7 @@
     transition: all 0.4s ease;
     overflow-y: auto;
     z-index: 15;
+    overflow-x: hidden;
     
     &.mobile-menu-open {
       right: 0;
@@ -275,10 +276,11 @@
     border-radius: 4px;
     padding: 0;
     max-height: 0;
-    overflow: hidden;
     opacity: 1;
+    overflow: hidden;
     visibility: visible;
     transition: max-height 0.3s ease;
+    margin-left: 200px;
     
     &:before {
       display: none;

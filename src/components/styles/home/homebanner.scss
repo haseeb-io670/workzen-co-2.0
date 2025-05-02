@@ -129,6 +129,7 @@ $secondary-font: var(--font-secondary);
   
   .hero-text {
     flex: 0 0 45%;
+    padding-top: 60px;
     
     @media (max-width: 1024px) {
       flex: 0 0 100%;
