@@ -43,7 +43,7 @@ const HomeBanner = () => {
             
             <div className="hero-credentials animate-in">
               <div className="clutch-badge">
-                <img src="/agency/clutch.png" alt="Clutch Rating" />
+                <img src="/agency/clutch.webp" alt="Clutch Rating" />
                 {/* <div className="rating">
                   <div className="stars">★★★★★</div>
                   <p>Top Rated Agency on Clutch</p>

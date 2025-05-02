@@ -18,7 +18,7 @@ const HomeServices = () => {
       ),
       title: "Lead Generation",
       description: "Generate high-quality leads through targeted campaigns and proven strategies.",
-      image: "/service/lead-generation.png",
+      image: "/service/lead-generation.webp",
       subServices: [
         "Data Extraction",
         "Cold Calling",
@@ -37,7 +37,7 @@ const HomeServices = () => {
       ),
       title: "Development",
       description: "Create stunning digital experiences with our expert development services.",
-      image: "/service/development.png",
+      image: "/service/development.webp",
       subServices: [
         "Website / Landing Pages",
         "eCommerce Store",
@@ -56,7 +56,7 @@ const HomeServices = () => {
       ),
       title: "Digital Presence",
       description: "Build a strong online presence that attracts and engages your target audience.",
-      image: "/service/digital-presense.png",
+      image: "/service/digital-presense.webp",
       subServices: [
         "Branding",
         "Social Media Management",
@@ -74,7 +74,7 @@ const HomeServices = () => {
       ),
       title: "SEO",
       description: "Boost your visibility and rankings with our comprehensive SEO strategies.",
-      image: "/service/SEO.png",
+      image: "/service/SEO.webp",
       subServices: [
         "On Page / Off Page",
         "Local SEO",
@@ -95,7 +95,7 @@ const HomeServices = () => {
       ),
       title: "Virtual Assistant",
       description: "Focus on what matters most while our VAs handle the day-to-day operations.",
-      image: "/service/virtual-assistant.png",
+      image: "/service/virtual-assistant.webp",
       subServices: [
         "Appointment Scheduling",
         "CRM Management",
