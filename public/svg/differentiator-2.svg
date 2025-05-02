@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300" fill="none">
+  <circle cx="150" cy="150" r="120" fill="#F5F5F5"/>
+  
+  <!-- Handshake Icon -->
+  <path d="M100 150H200" stroke="#1D7EC2" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Left Hand -->
+  <path d="M90 150C90 150 85 140 95 135C105 130 115 140 115 140L130 150" stroke="#FF6B35" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M75 150C75 150 70 140 80 135C90 130 100 140 100 140L115 150" stroke="#FF6B35" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M60 150C60 150 55 140 65 135C75 130 85 140 85 140L100 150" stroke="#FF6B35" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Right Hand -->
+  <path d="M210 150C210 150 215 140 205 135C195 130 185 140 185 140L170 150" stroke="#1D7EC2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M225 150C225 150 230 140 220 135C210 130 200 140 200 140L185 150" stroke="#1D7EC2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M240 150C240 150 245 140 235 135C225 130 215 140 215 140L200 150" stroke="#1D7EC2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- People Icons -->
+  <circle cx="90" cy="100" r="20" fill="#FF6B35" fill-opacity="0.2" stroke="#FF6B35" stroke-width="2"/>
+  <circle cx="210" cy="100" r="20" fill="#1D7EC2" fill-opacity="0.2" stroke="#1D7EC2" stroke-width="2"/>
+  
+  <!-- Body -->
+  <path d="M90 120V190" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+  <path d="M210 120V190" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Arms -->
+  <path d="M90 140L70 160" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+  <path d="M90 140L110 160" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+  <path d="M210 140L190 160" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M210 140L230 160" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Legs -->
+  <path d="M90 190L75 220" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+  <path d="M90 190L105 220" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+  <path d="M210 190L195 220" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M210 190L225 220" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Connection Elements -->
+  <circle cx="150" cy="70" r="15" fill="#7A3B69" fill-opacity="0.2" stroke="#7A3B69" stroke-width="2"/>
+  <path d="M120 85L135 70" stroke="#7A3B69" stroke-width="2" stroke-linecap="round"/>
+  <path d="M180 85L165 70" stroke="#7A3B69" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Decorative Elements -->
+  <rect x="130" y="200" width="40" height="20" rx="5" fill="#7A3B69" fill-opacity="0.2" stroke="#7A3B69" stroke-width="2"/>
+  <rect x="140" y="230" width="20" height="10" rx="3" fill="#7A3B69" fill-opacity="0.2" stroke="#7A3B69" stroke-width="2"/>
+</svg> 

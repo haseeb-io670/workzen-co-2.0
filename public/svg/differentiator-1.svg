@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300" fill="none">
+  <circle cx="150" cy="150" r="120" fill="#F5F5F5"/>
+  
+  <!-- Brain Icon -->
+  <path d="M180 135C180 119.536 167.464 107 152 107C136.536 107 124 119.536 124 135C124 146.83 131.048 157.033 141 161.596V178C141 181.314 143.686 184 147 184H157C160.314 184 163 181.314 163 178V161.596C172.952 157.033 180 146.83 180 135Z" fill="#FF6B35" fill-opacity="0.2" stroke="#FF6B35" stroke-width="2"/>
+  
+  <path d="M152 84V94" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+  <path d="M118 101L125 108" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+  <path d="M186 101L179 108" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+  <path d="M103 135H113" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+  <path d="M191 135H201" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Gear Icons -->
+  <circle cx="100" cy="190" r="25" fill="#1D7EC2" fill-opacity="0.2" stroke="#1D7EC2" stroke-width="2"/>
+  <circle cx="100" cy="190" r="15" fill="#F5F5F5" stroke="#1D7EC2" stroke-width="2"/>
+  <path d="M100 155V165" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M100 215V225" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M65 190H75" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M125 190H135" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M76 166L83 173" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M117 207L124 214" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M76 214L83 207" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M117 173L124 166" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  
+  <circle cx="200" cy="190" r="25" fill="#1D7EC2" fill-opacity="0.2" stroke="#1D7EC2" stroke-width="2"/>
+  <circle cx="200" cy="190" r="15" fill="#F5F5F5" stroke="#1D7EC2" stroke-width="2"/>
+  <path d="M200 155V165" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M200 215V225" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M165 190H175" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M225 190H235" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M176 166L183 173" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M217 207L224 214" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M176 214L183 207" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M217 173L224 166" stroke="#1D7EC2" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Decorative Elements -->
+  <rect x="70" y="80" width="15" height="15" rx="3" fill="#FF6B35" fill-opacity="0.2"/>
+  <rect x="215" y="80" width="15" height="15" rx="3" fill="#FF6B35" fill-opacity="0.2"/>
+  <circle cx="70" cy="120" r="8" fill="#FF6B35" fill-opacity="0.2"/>
+  <circle cx="230" cy="120" r="8" fill="#FF6B35" fill-opacity="0.2"/>
+  <rect x="120" y="230" width="60" height="8" rx="4" fill="#1D7EC2" fill-opacity="0.2"/>
+  <rect x="135" y="245" width="30" height="8" rx="4" fill="#1D7EC2" fill-opacity="0.2"/>
+</svg> 

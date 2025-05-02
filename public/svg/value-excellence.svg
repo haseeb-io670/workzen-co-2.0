@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <!-- Trophy Body -->
+  <path d="M24 16H40V32C40 38.6274 34.6274 44 28 44H36C42.6274 44 48 38.6274 48 32V16H24Z" fill="#FF6B35" fill-opacity="0.2"/>
+  <path d="M16 16H48V20C48 26.6274 42.6274 32 36 32H28C21.3726 32 16 26.6274 16 20V16Z" fill="#FF6B35" fill-opacity="0.1" stroke="#FF6B35" stroke-width="2"/>
+  
+  <!-- Trophy Cup -->
+  <path d="M22 16H42" stroke="#FF6B35" stroke-width="2"/>
+  <path d="M32 32V44" stroke="#FF6B35" stroke-width="2"/>
+  <path d="M24 44H40" stroke="#FF6B35" stroke-width="2"/>
+  <path d="M28 44V52" stroke="#FF6B35" stroke-width="2"/>
+  <path d="M36 44V52" stroke="#FF6B35" stroke-width="2"/>
+  <path d="M24 52H40" stroke="#FF6B35" stroke-width="2"/>
+  
+  <!-- Star on Top -->
+  <path d="M32 8L33.5 11.1962H36.9443L34.2221 13.1123L35.7221 16.3085L32 14.3923L28.2779 16.3085L29.7779 13.1123L27.0557 11.1962H30.5L32 8Z" fill="#FF6B35"/>
+  
+  <!-- Decorative Elements -->
+  <circle cx="16" cy="24" r="4" fill="white" stroke="#FF6B35" stroke-width="1"/>
+  <circle cx="48" cy="24" r="4" fill="white" stroke="#FF6B35" stroke-width="1"/>
+</svg> 
