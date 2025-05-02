@@ -1,9 +1,16 @@
 import React from 'react'
+import HomeBanner from '../components/home/HomeBanner'
+import HomeAbout from '../components/home/HomeAbout'
+import HomeServices from '../components/home/HomeServices'
+import HomeContact from '../components/home/HomeContact'
 
-const Home = () => {
+function Home() {
   return (
     <>
-    <div style={{fontSize: '16px', display: 'flex', alignItems: 'center'}}>Home</div>
+      <HomeBanner />
+      <HomeAbout />
+      <HomeServices />
+      <HomeContact />
     </>
   )
 }

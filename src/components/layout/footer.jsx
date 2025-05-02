@@ -54,7 +54,7 @@ const Footer = () => {
                   <a href="tel:(412)866-2284">(412) 866-2284</a>
                 </li>
                 <li className="email">
-                  <a href="mailto:info@workzen.co">info@workzen.co</a>
+                  <a href="mailto:info@workzen360.com">info@workzen360.com</a>
                 </li>
               </ul>
               

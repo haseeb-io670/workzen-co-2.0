@@ -71,6 +71,9 @@ const Header = () => {
             <li className="nav-item">
               <a href="/" className="nav-link active">Home</a>
             </li>
+            <li className="nav-item">
+              <a href="/about" className="nav-link">About</a>
+            </li>
             <li className={`nav-item dropdown ${isServicesDropdownOpen ? 'open' : ''}`} ref={servicesDropdownRef}>
               <a 
                 href="/services" 
@@ -92,9 +95,6 @@ const Header = () => {
                 <li><a href="/services/ppc" className="dropdown-item">PPC Advertising</a></li>
                 <li><a href="/services/email" className="dropdown-item">Email Marketing</a></li>
               </ul>
-            </li>
-            <li className="nav-item">
-              <a href="/about" className="nav-link">About</a>
             </li>
             <li className="nav-item">
               <a href="/industries" className="nav-link">Industries</a>
