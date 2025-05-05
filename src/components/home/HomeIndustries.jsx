@@ -4,52 +4,78 @@ import '../styles/home/homeindustries.scss';
 const HomeIndustries = () => {
   const [isInView, setIsInView] = useState(false);
   const [activeIndustry, setActiveIndustry] = useState(0);
-  const [hoverIndex, setHoverIndex] = useState(null);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const [hoveringIndicator, setHoveringIndicator] = useState(false);
   const sectionRef = useRef(null);
-  const sliderRef = useRef(null);
+  const galleryRef = useRef(null);
+  const panelsRef = useRef([]);
 
   const industries = [
     {
       id: 1,
       name: "E-Commerce",
       image: "/industries/e-commerce.webp",
+      symbol: "EC",
+      color: "#F27E63",
+      accentColor: "#FFD5CC",
       description: "Boost conversions and scale your online store with our specialized e-commerce solutions.",
-      features: ["Product Optimization", "Shopping Funnel Analysis", "Conversion Rate Optimization"]
+      features: ["Product Optimization", "Shopping Funnel Analysis", "Conversion Rate Optimization"],
+      expertise: 92
     },
     {
       id: 2,
       name: "SaaS",
       image: "/industries/saas.webp",
+      symbol: "SS",
+      color: "#4F9CF9",
+      accentColor: "#DBE9FF",
       description: "Accelerate growth and reduce CAC for your software company with our SaaS marketing expertise.",
-      features: ["User Acquisition", "Retention Strategies", "Product-Led Growth"]
+      features: ["User Acquisition", "Retention Strategies", "Product-Led Growth"],
+      expertise: 95
     },
     {
       id: 3,
       name: "Finance",
       image: "/industries/finance.webp",
+      symbol: "FN",
+      color: "#65C466",
+      accentColor: "#D7F0D8",
       description: "Build trust and generate qualified leads for your financial services with compliant strategies.",
-      features: ["Regulatory Compliance", "Trust Building", "Lead Qualification"]
+      features: ["Regulatory Compliance", "Trust Building", "Lead Qualification"],
+      expertise: 88
     },
     {
       id: 4,
       name: "Law Firms",
       image: "/industries/law-firms.webp",
+      symbol: "LF",
+      color: "#7C5AC7",
+      accentColor: "#E5DCFF",
       description: "Establish authority and convert high-value clients for your law practice.",
-      features: ["Case Studies", "Client Testimonials", "Practice Area Specialization"]
+      features: ["Case Studies", "Client Testimonials", "Practice Area Specialization"],
+      expertise: 85
     },
     {
       id: 5,
       name: "Medical",
       image: "/industries/medical.webp",
+      symbol: "MD",
+      color: "#42BDC8",
+      accentColor: "#D5F2F5",
       description: "Expand your patient base and improve booking rates with HIPAA-compliant marketing.",
-      features: ["Patient Acquisition", "HIPAA Compliance", "Healthcare Branding"]
+      features: ["Patient Acquisition", "HIPAA Compliance", "Healthcare Branding"],
+      expertise: 90
     },
     {
       id: 6,
       name: "Real Estate",
       image: "/industries/real-estate.webp",
+      symbol: "RE",
+      color: "#F1A036",
+      accentColor: "#FFEFD0",
       description: "Generate quality leads and showcase properties effectively with targeted strategies.",
-      features: ["Property Showcasing", "Buyer/Seller Targeting", "Location-Based Marketing"]
+      features: ["Property Showcasing", "Buyer/Seller Targeting", "Location-Based Marketing"],
+      expertise: 93
     }
   ];
 
@@ -76,18 +102,37 @@ const HomeIndustries = () => {
   }, []);
 
   useEffect(() => {
+    // Only auto-rotate when not interacting
     const interval = setInterval(() => {
-      if (!hoverIndex) {
+      if (!isInteracting && !hoveringIndicator) {
         setActiveIndustry((prev) => (prev + 1) % industries.length);
       }
-    }, 5000);
+    }, 6000);
     
     return () => clearInterval(interval);
-  }, [hoverIndex, industries.length]);
+  }, [isInteracting, hoveringIndicator, industries.length]);
 
   useEffect(() => {
-    if (sliderRef.current) {
-      sliderRef.current.style.transform = `translateX(-${activeIndustry * 100}%)`;
+    const updatePanels = () => {
+      panelsRef.current.forEach((panel, index) => {
+        if (panel) {
+          if (index === activeIndustry) {
+            panel.classList.add('active');
+          } else {
+            panel.classList.remove('active');
+          }
+        }
+      });
+    };
+
+    updatePanels();
+
+    if (galleryRef.current) {
+      const scrollAmount = activeIndustry * (window.innerWidth > 1200 ? 410 : 330);
+      galleryRef.current.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
     }
   }, [activeIndustry]);
 
@@ -95,121 +140,182 @@ const HomeIndustries = () => {
     setActiveIndustry(index);
   };
 
-  const handleMouseEnter = (index) => {
-    setHoverIndex(index);
+  const handleMouseEnter = () => {
+    setIsInteracting(true);
   };
 
   const handleMouseLeave = () => {
-    setHoverIndex(null);
+    setIsInteracting(false);
+  };
+
+  const handleIndicatorMouseEnter = () => {
+    setHoveringIndicator(true);
+  };
+
+  const handleIndicatorMouseLeave = () => {
+    setHoveringIndicator(false);
   };
 
   return (
     <section className="industries-section" ref={sectionRef}>
+      <div className="industries-backdrop">
+        <div className="backdrop-design"></div>
+      </div>
+      
       <div className="industries-container">
         <div className={`industries-content ${isInView ? 'in-view' : ''}`}>
           <div className="industries-header">
-            <div className="section-tag">Industries We Serve</div>
+            <div className="section-mark">
+              <span className="mark-line"></span>
+              <span className="mark-text">Industry Expertise</span>
+            </div>
+            
             <h2 className="section-title">
-              Specialized <span className="highlight">Strategies</span> for Your Industry
+              Refined <span className="highlight">Mastery</span> Across Sectors
             </h2>
+            
             <p className="section-subtitle">
-              We understand the unique challenges and opportunities in your sector
+              Our sophisticated strategies are tailored to each industry's unique challenges and opportunities.
             </p>
           </div>
           
-          <div className="industries-showcase">
-            <div className="industry-display">
-              <div className="industry-image-wrapper">
-                <div className="industry-slider" ref={sliderRef}>
-                  {industries.map((industry, index) => (
-                    <div 
-                      key={industry.id} 
-                      className={`industry-slide ${index === activeIndustry ? 'active' : ''}`}
-                    >
-                      <div className="image-container">
-                        <img src={industry.image} alt={industry.name} />
-                      </div>
-                      <div className="industry-info">
-                        <h3>{industry.name}</h3>
-                        <p>{industry.description}</p>
-                        <ul className="industry-features">
-                          {industry.features.map((feature, i) => (
-                            <li key={i}>
-                              <span className="feature-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                                  <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                              </span>
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                        {/* <a href={`/industries/${industry.name.toLowerCase().replace(/\s+/g, '-')}`} className="industry-link">
-                          <span>Learn More</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                          </svg>
-                        </a> */}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="industry-indicators">
+          <div className="industries-experience-gallery">
+            <div className="gallery-main">
+              <div 
+                className="gallery-panels" 
+                ref={galleryRef}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
                 {industries.map((industry, index) => (
                   <div 
                     key={industry.id}
-                    className={`indicator ${index === activeIndustry ? 'active' : ''}`}
+                    className={`industry-panel ${index === activeIndustry ? 'active' : ''}`}
                     onClick={() => handleIndicatorClick(index)}
-                  ></div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="industry-selection">
-              <div className="selection-heading">
-                <h3>Explore Industries</h3>
-              </div>
-              <div className="industry-tabs">
-                {industries.map((industry, index) => (
-                  <div 
-                    key={industry.id}
-                    className={`industry-tab ${index === activeIndustry ? 'active' : ''}`}
-                    onClick={() => handleIndicatorClick(index)}
-                    onMouseEnter={() => handleMouseEnter(index)}
-                    onMouseLeave={handleMouseLeave}
+                    ref={el => panelsRef.current[index] = el}
                   >
-                    <div className="tab-content">
-                      <div className="indicator"></div>
-                      <span>{industry.name}</span>
-                    </div>
-                    <div className="hover-reveal">
-                      <img src={industry.image} alt={industry.name} />
+                    <div className="panel-content" style={{'--industry-color': industry.color, '--industry-accent': industry.accentColor}}>
+                      <div className="panel-image-container">
+                        <div className="panel-image-wrapper">
+                          <img src={industry.image} alt={industry.name} />
+                          <div className="image-overlay"></div>
+                        </div>
+                        
+                        <div className="panel-symbol" style={{background: industry.color}}>
+                          {industry.symbol}
+                        </div>
+                      </div>
+                      
+                      <div className="panel-details">
+                        <div className="panel-header">
+                          <h3 className="industry-name">{industry.name}</h3>
+                          <div className="expertise-meter">
+                            <div className="expertise-fill" style={{width: `${industry.expertise}%`}}></div>
+                            <span className="expertise-label">{industry.expertise}% Expertise</span>
+                          </div>
+                        </div>
+                        
+                        <p className="industry-description">{industry.description}</p>
+                        
+                        <div className="industry-specialties">
+                          {industry.features.map((feature, i) => (
+                            <div key={i} className="specialty-item">
+                              <div className="specialty-indicator"></div>
+                              <span>{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="panel-accent"></div>
                     </div>
                   </div>
                 ))}
               </div>
+              
+              <div className="gallery-navigation">
+                <div 
+                  className="navigation-indicators"
+                  onMouseEnter={handleIndicatorMouseEnter}
+                  onMouseLeave={handleIndicatorMouseLeave}
+                >
+                  {industries.map((industry, index) => (
+                    <button 
+                      key={industry.id}
+                      className={`nav-indicator ${index === activeIndustry ? 'active' : ''}`}
+                      onClick={() => handleIndicatorClick(index)}
+                      style={{'--indicator-color': industry.color}}
+                      aria-label={`Show ${industry.name}`}
+                    >
+                      <span className="indicator-progress"></span>
+                      <span className="indicator-label">{industry.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
           
-          <div className="industries-cta">
-            <div className="cta-content">
-              <h3>Not seeing your industry?</h3>
-              <p>Our methodologies adapt to any business. Let's discuss your specific needs.</p>
+          <div className="industries-mobile">
+            <div className="mobile-showcase">
+              {industries.map((industry, index) => (
+                <div 
+                  key={industry.id}
+                  className={`mobile-panel ${index === activeIndustry ? 'active' : ''}`}
+                  style={{'--industry-color': industry.color, '--industry-accent': industry.accentColor}}
+                >
+                  <div className="mobile-panel-header">
+                    <div className="mobile-symbol">{industry.symbol}</div>
+                    <div className="mobile-title">
+                      <h3>{industry.name}</h3>
+                      <div className="expertise-indicator">
+                        <div className="expertise-bar">
+                          <div className="expertise-progress" style={{width: `${industry.expertise}%`}}></div>
+                        </div>
+                        <span className="expertise-percentage">{industry.expertise}%</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mobile-image">
+                    <img src={industry.image} alt={industry.name} />
+                  </div>
+                  
+                  <div className="mobile-content">
+                    <p>{industry.description}</p>
+                    
+                    <div className="mobile-specialties">
+                      {industry.features.map((feature, i) => (
+                        <div key={i} className="mobile-specialty">
+                          <span className="specialty-marker"></span>
+                          {feature}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-           
+            
+            <div className="mobile-navigation">
+              {industries.map((industry, index) => (
+                <button 
+                  key={industry.id}
+                  className={`mobile-nav-dot ${index === activeIndustry ? 'active' : ''}`}
+                  onClick={() => handleIndicatorClick(index)}
+                  style={{'--dot-color': industry.color}}
+                ></button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
       
-      <div className="industries-decoration">
-        <div className="deco-circle circle-1"></div>
-        <div className="deco-circle circle-2"></div>
-        <div className="deco-shape shape-1"></div>
-        <div className="deco-shape shape-2"></div>
-        <div className="deco-lines"></div>
+      <div className="industries-decorations">
+        <div className="deco-element elem-1"></div>
+        <div className="deco-element elem-2"></div>
+        <div className="deco-element elem-3"></div>
+        <div className="grid-pattern"></div>
       </div>
     </section>
   );

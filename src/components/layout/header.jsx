@@ -56,7 +56,7 @@ const Header = () => {
       <div className="container header-container">
         <div className="logo-container">
           <a href="/" className="logo">
-            <img src="/logo.png" alt="WorkZen Logo" className="logo-img" />
+            <img src="/logo.svg" alt="WorkZen Logo" className="logo-img" />
           </a>
         </div>
 
