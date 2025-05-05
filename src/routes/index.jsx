@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import AboutUs from "../pages/AboutUs";
 import Services from "../pages/Services.jsx";
 import IndustriesMain from "../pages/IndustriesMain";
+import BlogsPage from "../pages/Blogs";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
     path: "/industries-details",
     // index:true,
     element: <IndustriesMain />
+  },
+  {
+    path: "/blogs",
+    // index:true,
+    element: <BlogsPage />
   },
   {
     path: "/services",
