@@ -44,7 +44,7 @@ const Footer = () => {
           <div className="footer-main">
             <div className="footer-info">
               <a href="/" className="footer-logo">
-                <img src="/logo.png" alt="WorkZen Logo" />
+                <img src="/logo.svg" alt="WorkZen Logo" />
               </a>
               <ul className="contact-info">
                 <li className="address">
