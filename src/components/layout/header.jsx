@@ -1,11 +1,58 @@
 import { useState, useEffect, useRef } from 'react';
 import '../../components/styles/layout/header.scss';
 
+// Organize services in a 3x2 grid with external SVG files
+const servicesData = [
+  {
+    title: "Lead Generation",
+    path: "lead-generation",
+    icon: "/svg/creative-idea.svg"
+  },
+  {
+    title: "Development",
+    path: "development",
+    icon: "/svg/development.svg"
+  },
+  {
+    title: "Digital Presence",
+    path: "digital-presence",
+    icon: "/svg/data-analytics.svg"
+  },
+  {
+    title: "Virtual Assistant",
+    path: "virtual-assistant",
+    icon: "/svg/virtual-assistant.svg"
+  },
+  {
+    title: "SEO",
+    path: "seo",
+    icon: "/svg/strategic-plan.svg"
+  }
+];
+
+const ServiceItem = ({ service, closeDropdown }) => {
+  return (
+    <li className="service-item">
+      <a 
+        href={`/services/${service.path}`} 
+        className="dropdown-item"
+        onClick={closeDropdown}
+      >
+        <span className="service-icon">
+          <img src={service.icon} alt={service.title} width="20" height="20" />
+        </span>
+        <span>{service.title}</span>
+      </a>
+    </li>
+  );
+};
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const servicesDropdownRef = useRef(null);
+  const isMobile = useRef(window.innerWidth <= 991);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,8 +63,16 @@ const Header = () => {
       }
     };
 
+    const handleResize = () => {
+      isMobile.current = window.innerWidth <= 991;
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -27,8 +82,7 @@ const Header = () => {
       }
     };
 
-    // Only add the event listener if the dropdown is open
-    if (isServicesDropdownOpen) {
+    if (isServicesDropdownOpen && isMobile.current) {
       document.addEventListener('mousedown', handleClickOutside);
     }
     
@@ -39,16 +93,26 @@ const Header = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    // Close dropdown when mobile menu is toggled
     if (isServicesDropdownOpen) {
       setIsServicesDropdownOpen(false);
     }
   };
 
-  const toggleServicesDropdown = (e) => {
-    e.preventDefault(); // Prevent navigation for all devices
-    e.stopPropagation(); // Stop event bubbling
-    setIsServicesDropdownOpen(!isServicesDropdownOpen);
+  const handleServicesClick = (e) => {
+    if (isMobile.current) {
+      e.preventDefault();
+      setIsServicesDropdownOpen(!isServicesDropdownOpen);
+    }
+  };
+
+  const handleServicesHover = (isHovering) => {
+    if (!isMobile.current) {
+      setIsServicesDropdownOpen(isHovering);
+    }
+  };
+
+  const closeDropdown = () => {
+    setIsServicesDropdownOpen(false);
   };
 
   return (
@@ -74,11 +138,16 @@ const Header = () => {
             <li className="nav-item">
               <a href="/about-us" className="nav-link">About</a>
             </li>
-            <li className={`nav-item dropdown ${isServicesDropdownOpen ? 'open' : ''}`} ref={servicesDropdownRef}>
+            <li 
+              className={`nav-item dropdown ${isServicesDropdownOpen ? 'open' : ''}`} 
+              ref={servicesDropdownRef}
+              onMouseEnter={() => handleServicesHover(true)}
+              onMouseLeave={() => handleServicesHover(false)}
+            >
               <a 
                 href="/services" 
                 className="nav-link dropdown-toggle" 
-                onClick={toggleServicesDropdown}
+                onClick={handleServicesClick}
                 aria-expanded={isServicesDropdownOpen}
                 aria-haspopup="true"
               >
@@ -87,13 +156,14 @@ const Header = () => {
                   <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" fill="none" />
                 </svg>
               </a>
-              <ul className={`dropdown-menu ${isServicesDropdownOpen ? 'show' : ''}`}>
-                <li><a href="/services/digital-marketing" className="dropdown-item">Digital Marketing</a></li>
-                <li><a href="/services/seo" className="dropdown-item">SEO Optimization</a></li>
-                <li><a href="/services/social-media" className="dropdown-item">Social Media Management</a></li>
-                <li><a href="/services/content" className="dropdown-item">Content Creation</a></li>
-                <li><a href="/services/ppc" className="dropdown-item">PPC Advertising</a></li>
-                <li><a href="/services/email" className="dropdown-item">Email Marketing</a></li>
+              <ul className={`dropdown-menu staggered-dropdown ${isServicesDropdownOpen ? 'show' : ''}`}>
+                {servicesData.map((service, index) => (
+                  <ServiceItem 
+                    key={index} 
+                    service={service} 
+                    closeDropdown={closeDropdown}
+                  />
+                ))}
               </ul>
             </li>
             <li className="nav-item">

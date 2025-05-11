@@ -6,12 +6,12 @@
 :root {
   /* Color scheme */
   --color-primary: #FF6500;
+  --color-primary-rgb: 255, 101, 0;
   --color-secondary: #1E3E62;
   --color-dark: #0B192C;
   --color-black: #000000;
   
   /* RGB values for CSS variables */
-  --color-primary-rgb: 255, 101, 0;
   --color-secondary-rgb: 30, 62, 98;
   --color-secondary-light-rgb: 42, 88, 136;
   --color-dark-rgb: 11, 25, 44;

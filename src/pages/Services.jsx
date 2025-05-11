@@ -1,9 +1,9 @@
 import React from 'react'
-import HomeServices from '../components/home/HomeServices'
+import ServiceMain from '../components/main/ServiceMain'
 
 const Services = () => {
   return (
-        <HomeServices />
+    <ServiceMain />
   )
 }
 

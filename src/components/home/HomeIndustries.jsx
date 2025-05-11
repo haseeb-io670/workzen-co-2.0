@@ -1,5 +1,54 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback, memo } from 'react';
 import '../styles/home/homeindustries.scss';
+
+// Memoize the industry panel to prevent unnecessary re-renders
+const IndustryPanel = memo(({ industry, isActive, onClick }) => (
+  <div 
+    className={`industry-panel ${isActive ? 'active' : ''}`}
+    onClick={onClick}
+  >
+    <div className="panel-content" style={{'--industry-color': industry.color, '--industry-accent': industry.accentColor}}>
+      <div className="panel-image-container">
+        <div className="panel-image-wrapper">
+          <img 
+            src={industry.image} 
+            alt={industry.name}
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="image-overlay"></div>
+        </div>
+        
+        <div className="panel-symbol" style={{background: industry.color}}>
+          {industry.symbol}
+        </div>
+      </div>
+      
+      <div className="panel-details">
+        <div className="panel-header">
+          <h3 className="industry-name">{industry.name}</h3>
+          <div className="expertise-meter">
+            <div className="expertise-fill" style={{width: `${industry.expertise}%`}}></div>
+            <span className="expertise-label">{industry.expertise}% Expertise</span>
+          </div>
+        </div>
+        
+        <p className="industry-description">{industry.description}</p>
+        
+        <div className="industry-specialties">
+          {industry.features.map((feature, i) => (
+            <div key={i} className="specialty-item">
+              <div className="specialty-indicator"></div>
+              <span>{feature}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <div className="panel-accent"></div>
+    </div>
+  </div>
+));
 
 const HomeIndustries = () => {
   const [isInView, setIsInView] = useState(false);
@@ -9,8 +58,11 @@ const HomeIndustries = () => {
   const sectionRef = useRef(null);
   const galleryRef = useRef(null);
   const panelsRef = useRef([]);
+  const observerRef = useRef(null);
+  const autoRotateTimeoutRef = useRef(null);
 
-  const industries = [
+  // Memoize the industries data
+  const industries = useRef([
     {
       id: 1,
       name: "E-Commerce",
@@ -77,84 +129,97 @@ const HomeIndustries = () => {
       features: ["Property Showcasing", "Buyer/Seller Targeting", "Location-Based Marketing"],
       expertise: 93
     }
-  ];
+  ]).current;
 
+  // Optimize intersection observer
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    observerRef.current = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
-          observer.disconnect();
+          observerRef.current.disconnect();
         }
       },
-      { threshold: 0.2 }
+      { 
+        threshold: 0.2,
+        rootMargin: '50px'
+      }
     );
     
     if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+      observerRef.current.observe(sectionRef.current);
     }
     
     return () => {
-      if (sectionRef.current) {
-        observer.disconnect();
+      if (observerRef.current) {
+        observerRef.current.disconnect();
       }
     };
   }, []);
 
-  useEffect(() => {
-    // Only auto-rotate when not interacting
-    const interval = setInterval(() => {
-      if (!isInteracting && !hoveringIndicator) {
-        setActiveIndustry((prev) => (prev + 1) % industries.length);
-      }
-    }, 6000);
-    
-    return () => clearInterval(interval);
+  // Optimize auto-rotation with useCallback
+  const autoRotate = useCallback(() => {
+    if (!isInteracting && !hoveringIndicator) {
+      setActiveIndustry((prev) => (prev + 1) % industries.length);
+    }
   }, [isInteracting, hoveringIndicator, industries.length]);
 
   useEffect(() => {
+    autoRotateTimeoutRef.current = setInterval(autoRotate, 6000);
+    return () => {
+      if (autoRotateTimeoutRef.current) {
+        clearInterval(autoRotateTimeoutRef.current);
+      }
+    };
+  }, [autoRotate]);
+
+  // Optimize panel updates
+  useEffect(() => {
+    if (!galleryRef.current) return;
+
     const updatePanels = () => {
-      panelsRef.current.forEach((panel, index) => {
-        if (panel) {
-          if (index === activeIndustry) {
-            panel.classList.add('active');
-          } else {
-            panel.classList.remove('active');
+      requestAnimationFrame(() => {
+        panelsRef.current.forEach((panel, index) => {
+          if (panel) {
+            if (index === activeIndustry) {
+              panel.classList.add('active');
+            } else {
+              panel.classList.remove('active');
+            }
           }
-        }
+        });
+
+        const scrollAmount = activeIndustry * (window.innerWidth > 1200 ? 410 : 330);
+        galleryRef.current.scrollTo({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
       });
     };
 
     updatePanels();
-
-    if (galleryRef.current) {
-      const scrollAmount = activeIndustry * (window.innerWidth > 1200 ? 410 : 330);
-      galleryRef.current.scrollTo({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-    }
   }, [activeIndustry]);
 
-  const handleIndicatorClick = (index) => {
+  // Memoize event handlers
+  const handleIndicatorClick = useCallback((index) => {
     setActiveIndustry(index);
-  };
+  }, []);
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = useCallback(() => {
     setIsInteracting(true);
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     setIsInteracting(false);
-  };
+  }, []);
 
-  const handleIndicatorMouseEnter = () => {
+  const handleIndicatorMouseEnter = useCallback(() => {
     setHoveringIndicator(true);
-  };
+  }, []);
 
-  const handleIndicatorMouseLeave = () => {
+  const handleIndicatorMouseLeave = useCallback(() => {
     setHoveringIndicator(false);
-  };
+  }, []);
 
   return (
     <section className="industries-section" ref={sectionRef}>
@@ -188,48 +253,13 @@ const HomeIndustries = () => {
                 onMouseLeave={handleMouseLeave}
               >
                 {industries.map((industry, index) => (
-                  <div 
+                  <IndustryPanel
                     key={industry.id}
-                    className={`industry-panel ${index === activeIndustry ? 'active' : ''}`}
+                    industry={industry}
+                    isActive={index === activeIndustry}
                     onClick={() => handleIndicatorClick(index)}
                     ref={el => panelsRef.current[index] = el}
-                  >
-                    <div className="panel-content" style={{'--industry-color': industry.color, '--industry-accent': industry.accentColor}}>
-                      <div className="panel-image-container">
-                        <div className="panel-image-wrapper">
-                          <img src={industry.image} alt={industry.name} />
-                          <div className="image-overlay"></div>
-                        </div>
-                        
-                        <div className="panel-symbol" style={{background: industry.color}}>
-                          {industry.symbol}
-                        </div>
-                      </div>
-                      
-                      <div className="panel-details">
-                        <div className="panel-header">
-                          <h3 className="industry-name">{industry.name}</h3>
-                          <div className="expertise-meter">
-                            <div className="expertise-fill" style={{width: `${industry.expertise}%`}}></div>
-                            <span className="expertise-label">{industry.expertise}% Expertise</span>
-                          </div>
-                        </div>
-                        
-                        <p className="industry-description">{industry.description}</p>
-                        
-                        <div className="industry-specialties">
-                          {industry.features.map((feature, i) => (
-                            <div key={i} className="specialty-item">
-                              <div className="specialty-indicator"></div>
-                              <span>{feature}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      <div className="panel-accent"></div>
-                    </div>
-                  </div>
+                  />
                 ))}
               </div>
               
@@ -321,4 +351,4 @@ const HomeIndustries = () => {
   );
 };
 
-export default HomeIndustries;
+export default memo(HomeIndustries);

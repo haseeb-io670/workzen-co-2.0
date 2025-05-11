@@ -65,67 +65,160 @@
   }
 }
 
-// Improved dropdown styling
+// Enhanced dropdown styling with staggered animation
 .dropdown-menu {
   position: absolute;
   top: 100%;
   left: 50%;
   margin-top: 10px;
-  transform: translateX(-50%);
-  min-width: 220px;
+  transform: translateX(-50%) translateY(5px) scaleY(0);
+  width: 560px;
   background-color: white;
-  border-radius: 6px;
-  padding: 0;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(0, 0, 0, 0.06);
   list-style: none;
   z-index: 100;
   opacity: 0;
   visibility: hidden;
   transform-origin: top center;
-  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.2s ease, 
+              visibility 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
+  grid-gap: 8px;
+  overflow: hidden;
   
   &:before {
     content: '';
     position: absolute;
-    top: -5px;
+    top: -6px;
     left: 50%;
     transform: translateX(-50%) rotate(45deg);
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background-color: white;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
     z-index: -1;
   }
   
-  // Show state for proper dropdown visibility
   &.show {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(0) scaleY(1);
+  }
+  
+  &.staggered-dropdown {
+    .service-item {
+      opacity: 0;
+      transform: translateY(-15px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      
+      @for $i from 1 through 6 {
+        &:nth-child(#{$i}) {
+          transition-delay: 0.05s * $i;
+        }
+      }
+    }
+    
+    &.show .service-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   .dropdown-item {
-    display: block;
-    padding: 0.8rem 1.2rem;
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
     color: var(--color-dark);
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
     white-space: nowrap;
+    border-radius: 8px;
     
-    &:first-child {
-      border-radius: 6px 6px 0 0;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(
+        90deg, 
+        rgba(var(--color-primary-rgb), 0.08) 0%, 
+        rgba(var(--color-primary-rgb), 0.03) 100%
+      );
+      transition: width 0.3s ease;
+      z-index: 0;
+      border-radius: 8px;
     }
     
-    &:last-child {
-      border-radius: 0 0 6px 6px;
+    .service-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      margin-right: 14px;
+      border-radius: 8px;
+      background-color: rgba(var(--color-primary-rgb), 0.08);
+      color: var(--color-primary);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      z-index: 1;
+      transform: scale(0.9);
+      
+      img {
+        width: 20px;
+        height: 20px;
+        transition: all 0.25s ease;
+        object-fit: contain;
+        filter: invert(46%) sepia(83%) saturate(2434%) hue-rotate(357deg) brightness(101%) contrast(102%);
+      }
+    }
+    
+    span {
+      position: relative;
+      z-index: 1;
     }
     
     &:hover {
-      background-color: rgba(255, 101, 0, 0.08);
       color: var(--color-primary);
-      text-decoration: none;
+      
+      &::before {
+        width: 100%;
+      }
+      
+      .service-icon {
+        background-color: var(--color-primary);
+        color: white;
+        transform: scale(1);
+        
+        img {
+          transform: scale(1.1);
+          filter: brightness(0) invert(1);
+        }
+      }
     }
   }
+}
+
+// Make dropdown arrow rotate on open
+.dropdown-arrow {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdown.open .dropdown-arrow {
+  transform: rotate(180deg);
 }
 
 .nav-link {
@@ -153,11 +246,6 @@
     padding-right: 0.3rem;
     cursor: pointer;
   }
-}
-
-.dropdown-arrow {
-  transition: transform 0.3s ease;
-  margin-top: 2px;
 }
 
 .header-actions {
@@ -270,34 +358,77 @@
     width: 100%;
     min-width: auto;
     margin-top: 0;
+    margin-left: 0;
     transform: none;
     box-shadow: none;
     background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
+    border-radius: 8px;
     padding: 0;
     max-height: 0;
     opacity: 1;
     overflow: hidden;
     visibility: visible;
-    transition: max-height 0.3s ease;
-    margin-left: 200px;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    border: none;
+    display: block;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    grid-gap: 0;
     
     &:before {
       display: none;
     }
     
     &.show {
-      max-height: 400px;
-      padding: 0.5rem 0;
+      max-height: 500px;
+      padding: 8px;
+      
+      .service-item {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    &.staggered-dropdown {
+      .service-item {
+        opacity: 0;
+        transform: translateY(-10px);
+        
+        @for $i from 1 through 6 {
+          &:nth-child(#{$i}) {
+            transition-delay: 0.05s * $i;
+          }
+        }
+      }
     }
     
     .dropdown-item {
       color: rgba(255, 255, 255, 0.8);
-      padding: 0.7rem 1rem;
+      padding: 10px 16px;
+      white-space: nowrap;
+      margin-bottom: 5px;
+      
+      &::before {
+        background: linear-gradient(
+          90deg, 
+          rgba(255, 255, 255, 0.1) 0%, 
+          rgba(255, 255, 255, 0.05) 100%
+        );
+      }
+      
+      .service-icon {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        transform: scale(0.9);
+      }
       
       &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
         color: var(--color-primary);
+        
+        .service-icon {
+          background-color: var(--color-primary);
+          transform: scale(1);
+        }
       }
     }
   }

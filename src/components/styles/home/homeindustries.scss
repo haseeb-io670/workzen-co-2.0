@@ -17,11 +17,11 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
 @keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translate3d(0, 40px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -165,6 +165,7 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
   
   .industries-content {
     opacity: 0;
+    will-change: opacity;
     transition: opacity 0.5s ease;
     
     &.in-view {
@@ -173,24 +174,23 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
       .industries-header {
         .section-mark {
           animation: slideInUp 0.8s ease forwards;
+          will-change: transform, opacity;
         }
         
         .section-title {
           animation: slideInUp 0.8s ease 0.2s forwards;
-          opacity: 0;
-          transform: translateY(40px);
+          will-change: transform, opacity;
         }
         
         .section-subtitle {
           animation: slideInUp 0.8s ease 0.4s forwards;
-          opacity: 0;
-          transform: translateY(40px);
+          will-change: transform, opacity;
         }
       }
       
       .industries-experience-gallery {
         animation: fadeIn 1.2s ease 0.6s forwards;
-        opacity: 0;
+        will-change: opacity;
       }
       
       .industries-mobile {
@@ -311,7 +311,9 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
           border-radius: 8px;
           overflow: hidden;
           transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-          transform: scale(0.95);
+          transform: translate3d(0, 0, 0);
+          will-change: transform, opacity;
+          backface-visibility: hidden;
           opacity: 0.8;
           box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
           cursor: pointer;
@@ -323,7 +325,7 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
           }
           
           &.active {
-            transform: scale(1);
+            transform: scale3d(1, 1, 1);
             opacity: 1;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
             
@@ -336,7 +338,7 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
               .panel-image-container {
                 .panel-image-wrapper {
                   img {
-                    transform: scale(1.05);
+                    transform: scale3d(1.05, 1.05, 1);
                   }
                 }
                 
@@ -402,6 +404,9 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
                   width: 100%;
                   height: 100%;
                   object-fit: cover;
+                  transform: scale3d(1, 1, 1);
+                  will-change: transform;
+                  backface-visibility: hidden;
                   transition: transform 1.2s ease;
                 }
                 
@@ -662,6 +667,8 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
         
         &.active {
           display: block;
+          animation: fadeIn 0.5s ease forwards;
+          will-change: opacity;
         }
         
         .mobile-panel-header {
@@ -824,6 +831,8 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
       position: absolute;
       background-color: rgba($primary-color, 0.05);
       border-radius: 50%;
+      will-change: transform;
+      backface-visibility: hidden;
       
       &.elem-1 {
         top: 15%;
@@ -833,6 +842,7 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
         background: linear-gradient(135deg, rgba($primary-color, 0.02), rgba($primary-color, 0.05));
         animation: subtleFloat 20s infinite ease-in-out;
         filter: blur(50px);
+        transform: translate3d(0, 0, 0);
       }
       
       &.elem-2 {
@@ -843,6 +853,7 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
         background: linear-gradient(135deg, rgba($secondary-color, 0.03), rgba($secondary-color, 0.05));
         animation: subtleFloat 18s infinite ease-in-out reverse;
         filter: blur(40px);
+        transform: translate3d(0, 0, 0);
       }
       
       &.elem-3 {
@@ -869,4 +880,29 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
       opacity: 0.3;
     }
   }
+}
+
+// Add hardware acceleration for smoother animations
+.industry-panel,
+.panel-image-wrapper img,
+.panel-symbol,
+.expertise-fill,
+.specialty-item,
+.nav-indicator,
+.mobile-panel {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+// Optimize transitions
+.industry-panel,
+.panel-content,
+.panel-image-wrapper img,
+.panel-symbol,
+.expertise-fill,
+.specialty-item,
+.nav-indicator {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
