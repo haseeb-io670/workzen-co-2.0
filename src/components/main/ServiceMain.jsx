@@ -14,6 +14,13 @@ const ServiceMain = () => {
       category: "marketing",
       icon: "/svg/lead-generation.svg",
       description: "Attract high-quality leads with our targeted campaigns and data-driven strategies.",
+      bulletPoints: [
+        "Data Extraction",
+        "Cold Calling",
+        "Email and SMS Marketing",
+        "PPC (Google and Meta Ads)",
+        "Social Media Paid Campaigns"
+      ],
       features: [
         "Data Extraction & Analysis",
         "Cold Calling Campaigns",
@@ -29,6 +36,12 @@ const ServiceMain = () => {
       category: "tech",
       icon: "/svg/development.svg",
       description: "Create stunning, functional digital experiences with our expert development services.",
+      bulletPoints: [
+        "Website / Landing Pages",
+        "eCommerce Store",
+        "Integrations (Payment Platforms/APIs)",
+        "CMS and Admin Panel"
+      ],
       features: [
         "Website & Landing Pages",
         "eCommerce Solutions",
@@ -42,8 +55,13 @@ const ServiceMain = () => {
       title: "Digital Presence",
       path: "digital-presence",
       category: "marketing",
-      icon: "/svg/digital-presence.svg",
+      icon: "/svg/digital.svg",
       description: "Build a strong, cohesive online presence that resonates with your target audience.",
+      bulletPoints: [
+        "Branding",
+        "Social Media Management",
+        "Activation of GBP"
+      ],
       features: [
         "Brand Identity Design",
         "Social Media Management",
@@ -54,32 +72,45 @@ const ServiceMain = () => {
     },
     {
       id: 4,
-      title: "Virtual Assistant",
-      path: "virtual-assistant",
-      category: "support",
-      icon: "/svg/virtual-assistant.svg",
-      description: "Focus on growth while our skilled VAs handle your day-to-day operations efficiently.",
-      features: [
-        "Calendar Management",
-        "CRM Administration",
-        "Email Management",
-        "Administrative Support",
-        "Customer Service"
-      ]
-    },
-    {
-      id: 5,
       title: "SEO",
       path: "seo",
       category: "marketing",
       icon: "/svg/seo.svg",
       description: "Improve visibility and drive organic traffic with our comprehensive SEO strategies.",
+      bulletPoints: [
+        "On Page / Off Page",
+        "Local SEO",
+        "National SEO",
+        "Onsite SEO",
+        "Blog Writing"
+      ],
       features: [
         "On-Page Optimization",
         "Off-Page SEO",
         "Local SEO",
         "Technical SEO",
         "Content Creation"
+      ]
+    },
+    {
+      id: 5,
+      title: "Virtual Assistant",
+      path: "virtual-assistant",
+      category: "support",
+      icon: "/svg/va.svg",
+      description: "Focus on growth while our skilled VAs handle your day-to-day operations efficiently.",
+      bulletPoints: [
+        "Appointment Scheduling",
+        "CRM Management",
+        "Calendar Management",
+        "Administrative Support"
+      ],
+      features: [
+        "Calendar Management",
+        "CRM Administration",
+        "Email Management",
+        "Administrative Support",
+        "Customer Service"
       ]
     }
   ];
@@ -128,9 +159,8 @@ const ServiceMain = () => {
         <div className="hero-content centered">
           <div className="hero-text">
             <h1>Our <span className="highlight">Services</span></h1>
-            <p>Comprehensive digital solutions tailored to elevate your business</p>
+            <p>Transforming ideas into digital success stories through innovative strategies and cutting-edge solutions</p>
           
-            
             <div className="hero-stats">
               <div className="stat-item">
                 <span className="stat-number">500+</span>
@@ -140,9 +170,25 @@ const ServiceMain = () => {
                 <span className="stat-number">98%</span>
                 <span className="stat-label">Client Satisfaction</span>
               </div>
+              <div className="stat-item">
+                <span className="stat-number">15+</span>
+                <span className="stat-label">Years Experience</span>
+              </div>
             </div>
           </div>
         </div>
+        
+        {/* Digital patterns overlay */}
+        <div className="digital-patterns">
+          {[...Array(20)].map((_, index) => (
+            <div key={index} className="pattern-element" style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`
+            }}></div>
+          ))}
+        </div>
+        
         <div className="hero-wave">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#ffffff" fillOpacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
@@ -155,7 +201,7 @@ const ServiceMain = () => {
         <div className="container">
           <div className="section-header">
             <h2>Explore Our <span className="highlight">Services</span></h2>
-            <p>Discover how we can help transform your business with our range of specialized services</p>
+            <p>Discover how our tailored digital solutions can elevate your brand, drive growth, and create meaningful connections with your audience</p>
           </div>
           
           <div className="services-carousel" ref={servicesRef}>
@@ -171,8 +217,19 @@ const ServiceMain = () => {
                       <img src={service.icon} alt={service.title} />
                     </div>
                     <h3>{service.title}</h3>
-                    <p>{service.description}</p>
+                    <ul className="service-bullet-points">
+                      {service.bulletPoints.map((point, index) => (
+                        <li key={index}>{point}</li>
+                      ))}
+                    </ul>
                     <div className="card-overlay"></div>
+                    <a href={`/services/${service.path}`} className="card-hover-button">
+                      Details
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </a>
                   </div>
                   <div className="service-back">
                     <h3>{service.title}</h3>
@@ -226,68 +283,118 @@ const ServiceMain = () => {
         <div className="container">
           <div className="section-header">
             <h2>Our <span className="highlight">Process</span></h2>
-            <p>How we deliver exceptional results for your business</p>
+            <p>A strategic approach designed to transform your digital presence</p>
           </div>
           
-          <div className="process-steps">
-            <div className="process-step">
-              <div className="step-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="8" x2="12" y2="12"></line>
-                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-              </div>
-              <div className="step-number">1</div>
-              <div className="step-content">
-                <h3>Discovery</h3>
-                <p>We learn about your business, goals, and challenges to create a tailored strategy.</p>
-              </div>
+          <div className="process-timeline">
+            <div className="timeline-track">
+              <div className="track-line"></div>
+              <div className="track-progress"></div>
             </div>
             
-            <div className="process-step">
-              <div className="step-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                  <polyline points="2 17 12 22 22 17"></polyline>
-                  <polyline points="2 12 12 17 22 12"></polyline>
-                </svg>
+            <div className="process-steps">
+              <div className="process-step" data-step="1">
+                <div className="step-connector">
+                  <div className="connector-dot"></div>
+                  <div className="connector-line"></div>
+                </div>
+                <div className="step-content">
+                  <div className="step-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="8" x2="12" y2="12"></line>
+                      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                  </div>
+                  <div className="step-details">
+                    <div className="step-number">01</div>
+                    <h3>Discovery</h3>
+                    <p>We dive deep into understanding your business, target audience, and competitive landscape to form a solid strategic foundation.</p>
+                    <ul className="step-deliverables">
+                      <li>Business Analysis</li>
+                      <li>User Research</li>
+                      <li>Competitive Review</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <div className="step-number">2</div>
-              <div className="step-content">
-                <h3>Strategy</h3>
-                <p>Our team develops a comprehensive plan aligned with your objectives and timeline.</p>
+              
+              <div className="process-step" data-step="2">
+                <div className="step-connector">
+                  <div className="connector-dot"></div>
+                  <div className="connector-line"></div>
+                </div>
+                <div className="step-content">
+                  <div className="step-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                      <polyline points="2 17 12 22 22 17"></polyline>
+                      <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                  </div>
+                  <div className="step-details">
+                    <div className="step-number">02</div>
+                    <h3>Strategy</h3>
+                    <p>Based on insights gathered, we craft a comprehensive roadmap that aligns with your business goals and sets clear benchmarks for success.</p>
+                    <ul className="step-deliverables">
+                      <li>Strategic Planning</li>
+                      <li>KPI Definition</li>
+                      <li>Timeline Creation</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-            </div>
-            
-            <div className="process-step">
-              <div className="step-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 20h9"></path>
-                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                </svg>
+              
+              <div className="process-step" data-step="3">
+                <div className="step-connector">
+                  <div className="connector-dot"></div>
+                  <div className="connector-line"></div>
+                </div>
+                <div className="step-content">
+                  <div className="step-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 20h9"></path>
+                      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                  </div>
+                  <div className="step-details">
+                    <div className="step-number">03</div>
+                    <h3>Execution</h3>
+                    <p>Our specialized teams implement the strategy with precision, ensuring every detail is perfectly executed while maintaining open communication.</p>
+                    <ul className="step-deliverables">
+                      <li>Content Creation</li>
+                      <li>Technical Implementation</li>
+                      <li>Regular Progress Updates</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <div className="step-number">3</div>
-              <div className="step-content">
-                <h3>Execution</h3>
-                <p>We implement the strategy with precision, keeping you informed at every step.</p>
-              </div>
-            </div>
-            
-            <div className="process-step">
-              <div className="step-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-                  <line x1="6" y1="1" x2="6" y2="4"></line>
-                  <line x1="10" y1="1" x2="10" y2="4"></line>
-                  <line x1="14" y1="1" x2="14" y2="4"></line>
-                </svg>
-              </div>
-              <div className="step-number">4</div>
-              <div className="step-content">
-                <h3>Optimization</h3>
-                <p>Continuous monitoring and refinement to maximize results and ROI.</p>
+              
+              <div className="process-step" data-step="4">
+                <div className="step-connector">
+                  <div className="connector-dot"></div>
+                </div>
+                <div className="step-content">
+                  <div className="step-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                      <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                      <line x1="6" y1="1" x2="6" y2="4"></line>
+                      <line x1="10" y1="1" x2="10" y2="4"></line>
+                      <line x1="14" y1="1" x2="14" y2="4"></line>
+                    </svg>
+                  </div>
+                  <div className="step-details">
+                    <div className="step-number">04</div>
+                    <h3>Optimization</h3>
+                    <p>We continuously analyze performance data to refine our approach, ensuring maximum effectiveness and optimal return on investment.</p>
+                    <ul className="step-deliverables">
+                      <li>Performance Analytics</li>
+                      <li>Iterative Improvements</li>
+                      <li>Detailed Reporting</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

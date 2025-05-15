@@ -50,10 +50,10 @@ $secondary-font: var(--font-secondary);
 
 @keyframes tickerScroll {
   0% {
-    transform: translateX(0);
+    transform: translateX(-50%);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(0);
   }
 }
 
@@ -549,7 +549,7 @@ $secondary-font: var(--font-secondary);
     border: 2px solid var(--color-primary);
     overflow: hidden;
     z-index: 3;
-    transform-origin: left;
+    transform-origin: right;
     
     @media (max-width: 768px) {
       height: 55px;
@@ -561,10 +561,10 @@ $secondary-font: var(--font-secondary);
     }
     
     &:first-child {
-      bottom: 40px;
+      bottom: 50px;
       left: -5%;
       right: -5%;
-      transform: rotate(-2deg);
+      transform: rotate(1deg);
       border-color: var(--color-primary);
       border-left: 2px solid var(--color-primary);
       border-right: 2px solid var(--color-primary);
@@ -594,7 +594,7 @@ $secondary-font: var(--font-secondary);
       bottom: 15px;
       left: -10%;
       right: -10%;
-      transform: rotate(-1deg);
+      transform: rotate(0deg);
       border-color: var(--color-secondary);
       
       @media (max-width: 768px) {

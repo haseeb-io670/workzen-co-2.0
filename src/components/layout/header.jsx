@@ -167,20 +167,21 @@ const Header = () => {
               </ul>
             </li>
             <li className="nav-item">
+              <a href="/pricing" className="nav-link">Pricing</a>
+            </li>
+            <li className="nav-item">
               <a href="/industries-details" className="nav-link">Industries</a>
             </li>
             <li className="nav-item">
               <a href="/blogs" className="nav-link">Blog</a>
             </li>
-            <li className="nav-item">
-              <a href="/contact" className="nav-link">Contact</a>
-            </li>
+            
           </ul>
         </nav>
 
         <div className="header-actions">
-          <a href="/contact" className="btn-wrapper">
-            <button className="glow-button">Get Started</button>
+          <a href="tel:+14128662284" className="btn-wrapper">
+            <button className="glow-button">(412) 866-2284</button>
           </a>
         </div>
       </div>
