@@ -1,0 +1,944 @@
+@import '../../../index.css';
+
+// Variables
+$primary-color: var(--color-primary);
+$secondary-color: var(--color-secondary);
+$dark-color: var(--color-dark);
+$light-color: #f9f9ff;
+
+// Animations
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-15px) translateX(10px);
+  }
+  50% {
+    transform: translateY(5px) translateX(15px);
+  }
+  75% {
+    transform: translateY(10px) translateX(-5px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+.pricing-main {
+  overflow-x: hidden;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    
+    h1, h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: $dark-color;
+      
+      .highlight {
+        color: #FF6500;
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 5px;
+          left: 0;
+          width: 100%;
+          height: 8px;
+          background-color: rgba($primary-color, 0.2);
+          z-index: -1;
+          border-radius: 4px;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+      }
+    }
+    
+    p {
+      font-size: 1.2rem;
+      color: rgba($dark-color, 0.7);
+      max-width: 700px;
+      margin: 0 auto;
+      
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
+    }
+  }
+  
+  // Hero Section
+  .pricing-hero {
+    position: relative;
+    background: linear-gradient(135deg, $dark-color, #16213e);
+    color: white;
+    padding: 120px 0 180px;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 50% auto;
+      opacity: 0.05;
+      z-index: 1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      
+      &.animate-on-scroll {
+        opacity: 0;
+        animation: fadeUp 0.8s ease-out forwards;
+      }
+      
+      h1 {
+        color: white;
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        
+        .highlight {
+          &::after {
+            background-color: rgba($primary-color, 0.3);
+          }
+        }
+        
+        @media (max-width: 768px) {
+          font-size: 3rem;
+        }
+      }
+      
+      p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        
+        @media (max-width: 768px) {
+          font-size: 1.1rem;
+        }
+      }
+    }
+    
+    .hero-wave {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      z-index: 2;
+      line-height: 0;
+    }
+    
+    .pricing-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+      
+      .particle {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        animation: float-particle 15s infinite ease-in-out;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 0;
+          width: 100px;
+          height: 1px;
+          background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), transparent);
+          transform: translateY(-50%);
+        }
+        
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 1px;
+          height: 100px;
+          background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
+          transform: translateX(-50%);
+        }
+        
+        &:nth-child(even) {
+          background-color: rgba($primary-color, 0.4);
+          width: 7px;
+          height: 7px;
+        }
+        
+        &:nth-child(3n) {
+          background-color: rgba($secondary-color, 0.4);
+          width: 6px;
+          height: 6px;
+        }
+      }
+    }
+  }
+  
+  // Pricing Plans Section
+  .pricing-plans-section {
+    padding: 3rem 0 5rem;
+    background-color: $light-color;
+    position: relative;
+    margin-top: -1px;
+    
+    .pricing-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+      
+      &.animate-on-scroll {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      .pricing-tab {
+        padding: 1rem 2rem;
+        background-color: white;
+        border: 2px solid transparent;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: $dark-color;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        &.active {
+          background-color: white;
+          color: $primary-color;
+          transform: translateY(-3px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+      }
+      
+      @media (max-width: 768px) {
+        flex-wrap: wrap;
+        
+        .pricing-tab {
+          padding: 0.8rem 1.5rem;
+          font-size: 0.95rem;
+        }
+      }
+    }
+    
+    .pricing-cards-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+      
+      &.animate-on-scroll {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      @media (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+      
+      .pricing-card {
+        background-color: white;
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s ease;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        opacity: 0.7;
+        transform: scale(0.95);
+        
+        &.active {
+          opacity: 1;
+          transform: scale(1);
+          z-index: 2;
+        }
+        
+        &.highlighted {
+          border-top: 5px solid var(--plan-color);
+        }
+        
+        .popular-badge {
+          position: absolute;
+          top: -12px;
+          right: 20px;
+          background: linear-gradient(90deg, $primary-color, $secondary-color);
+          color: white;
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+          font-size: 0.9rem;
+          font-weight: 600;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .plan-header {
+          margin-bottom: 1.5rem;
+          
+          .plan-name {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--plan-color);
+          }
+          
+          .plan-description {
+            color: rgba($dark-color, 0.7);
+            font-size: 0.95rem;
+          }
+        }
+        
+        .plan-price {
+          margin-bottom: 1rem;
+          
+          .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: $dark-color;
+            line-height: 1;
+          }
+          
+          .period {
+            font-size: 1.1rem;
+            color: rgba($dark-color, 0.6);
+          }
+        }
+        
+        .hours-per-day {
+          padding: 0.8rem 1.2rem;
+          background-color: rgba(var(--plan-color), 0.1);
+          border-radius: 10px;
+          margin-bottom: 1.5rem;
+          
+          .hours {
+            font-weight: 700;
+            color: var(--plan-color);
+            margin-right: 0.5rem;
+          }
+          
+          .label {
+            font-size: 0.9rem;
+            color: rgba($dark-color, 0.7);
+          }
+        }
+        
+        .plan-features {
+          flex-grow: 1;
+          margin-bottom: 1.5rem;
+          
+          h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: $dark-color;
+            font-weight: 600;
+          }
+          
+          ul {
+            list-style: none;
+            padding: 0;
+            
+            li {
+              display: flex;
+              align-items: center;
+              margin-bottom: 0.8rem;
+              
+              &.feature-included .feature-icon svg {
+                width: 18px;
+                height: 18px;
+                stroke: var(--plan-color);
+              }
+              
+              &.feature-special .special-text {
+                font-size: 0.85rem;
+                font-weight: 700;
+                color: var(--plan-color);
+              }
+              
+              .feature-icon {
+                width: 24px;
+                height: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 0.8rem;
+                flex-shrink: 0;
+              }
+              
+              .feature-text {
+                font-size: 0.95rem;
+                color: rgba($dark-color, 0.8);
+              }
+            }
+          }
+        }
+        
+        .plan-action {
+          margin-top: auto;
+          
+          .action-button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--plan-color);
+            color: white;
+            text-align: center;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            
+            &::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: -100%;
+              width: 100%;
+              height: 100%;
+              background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+              transition: all 0.6s ease;
+            }
+            
+            &:hover {
+              transform: translateY(-3px);
+              box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+              
+              &::before {
+                left: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Services Comparison Section
+  .services-comparison-section {
+    padding: 5rem 0;
+    background-color: white;
+    
+    .comparison-table-container {
+      overflow-x: auto;
+      margin-top: 3rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+      
+      &.animate-on-scroll {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      .comparison-table {
+        min-width: 900px;
+        
+        .table-header {
+          display: grid;
+          grid-template-columns: 180px 200px repeat(4, 1fr);
+          gap: 1px;
+          background-color: #f0f0f0;
+          margin-bottom: 1px;
+          border-radius: 10px 10px 0 0;
+          overflow: hidden;
+          
+          > div {
+            background-color: $dark-color;
+            color: white;
+            padding: 1.2rem 1rem;
+            font-weight: 600;
+            
+            
+          }
+          
+          .plan-column {
+            text-align: center;
+            
+            .plan-name {
+              font-size: 1.2rem;
+              margin-bottom: 0.3rem;
+            }
+            
+            .plan-price {
+              font-size: 0.9rem;
+              margin-bottom: 0.2rem;
+            }
+            
+            .plan-hours {
+              font-size: 0.8rem;
+              opacity: 0.8;
+            }
+          }
+        }
+        
+        .table-body {
+          display: grid;
+          grid-template-columns: 180px 200px repeat(4, 1fr);
+          gap: 1px;
+          background-color: #f0f0f0;
+          border-radius: 0 0 10px 10px;
+          overflow: hidden;
+          
+          .table-row {
+            display: contents;
+            
+            &.category-start {
+              .service-cell, .plan-cell {
+                border-top: 1px solid #f0f0f0;
+              }
+            }
+            
+            .category-cell {
+              background-color: $light-color;
+              padding: 1rem;
+              display: flex;
+              align-items: center;
+              font-weight: 700;
+              color: $dark-color;
+            }
+            
+            .service-cell {
+              background-color: white;
+              padding: 1rem;
+              display: flex;
+              align-items: center;
+              color: $dark-color;
+            }
+            
+            .plan-cell {
+              background-color: white;
+              padding: 1rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              
+              svg {
+                width: 20px;
+                height: 20px;
+              }
+              
+              .x-mark {
+                color: rgba($dark-color, 0.3);
+                font-size: 1.1rem;
+              }
+              
+              .special-text {
+                font-size: 0.85rem;
+                font-weight: 600;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Additional Benefits Section
+  .additional-benefits-section {
+    padding: 5rem 0;
+    background-color: $light-color;
+    
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+      
+      @media (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      @media (max-width: 576px) {
+        grid-template-columns: 1fr;
+      }
+      
+      .benefit-card {
+        background-color: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(30px);
+        
+        &.animate-on-scroll {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        &:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+          
+          .benefit-icon {
+            transform: scale(1.1);
+            background-color: $primary-color;
+            
+            svg {
+              stroke: white;
+            }
+          }
+        }
+        
+        .benefit-icon {
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+          background-color: rgba($primary-color, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 1.5rem;
+          transition: all 0.3s ease;
+          
+          svg {
+            width: 32px;
+            height: 32px;
+            stroke: $primary-color;
+            transition: all 0.3s ease;
+          }
+        }
+        
+        h3 {
+          color: $dark-color;
+          font-size: 1.3rem;
+          margin-bottom: 1rem;
+        }
+        
+        p {
+          color: rgba($dark-color, 0.7);
+          font-size: 0.95rem;
+        }
+      }
+    }
+  }
+  
+  // FAQ Section
+  .pricing-faq-section {
+    padding: 5rem 0;
+    background-color: white;
+    
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+      
+      .faq-item {
+        background-color: $light-color;
+        border-radius: 15px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(30px);
+        
+        &.animate-on-scroll {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+        
+        h3 {
+          color: $dark-color;
+          font-size: 1.3rem;
+          margin-bottom: 1rem;
+          position: relative;
+          padding-left: 1.5rem;
+          
+          &::before {
+            content: 'Q';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: $primary-color;
+            font-weight: 800;
+          }
+        }
+        
+        p {
+          color: rgba($dark-color, 0.7);
+          font-size: 1rem;
+          line-height: 1.6;
+          position: relative;
+          padding-left: 1.5rem;
+          
+          &::before {
+            content: 'A';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: $secondary-color;
+            font-weight: 800;
+          }
+        }
+      }
+    }
+  }
+  
+  // CTA Section
+  .pricing-cta-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    position: relative;
+    overflow: hidden;
+    
+    .cta-content {
+      color: white;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(30px);
+      
+      &.animate-on-scroll {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      h2 {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        
+        @media (max-width: 768px) {
+          font-size: 2.5rem;
+        }
+      }
+      
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 2.5rem;
+        color: rgba(255, 255, 255, 0.9);
+        
+        @media (max-width: 768px) {
+          font-size: 1.1rem;
+        }
+      }
+      
+      .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        
+        @media (max-width: 576px) {
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        .cta-button {
+          padding: 1.2rem 2.5rem;
+          border-radius: 50px;
+          font-size: 1.1rem;
+          font-weight: 600;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 200px;
+          
+          @media (max-width: 768px) {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+          }
+          
+          &.primary {
+            background-color: white;
+            color: $primary-color;
+            
+            &:hover {
+              transform: translateY(-5px);
+              box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            }
+          }
+          
+          &.secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+            
+            svg {
+              margin-right: 0.5rem;
+              stroke: white;
+            }
+            
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.1);
+              transform: translateY(-5px);
+              box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            }
+          }
+        }
+      }
+    }
+    
+    .cta-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+      
+      .shape {
+        position: absolute;
+        border-radius: 50%;
+        
+        &.shape-1 {
+          width: 300px;
+          height: 300px;
+          bottom: -150px;
+          left: -100px;
+          background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%);
+        }
+        
+        &.shape-2 {
+          width: 400px;
+          height: 400px;
+          top: -200px;
+          right: -200px;
+          background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15), transparent 70%);
+        }
+        
+        &.shape-3 {
+          width: 200px;
+          height: 200px;
+          top: 50%;
+          left: 60%;
+          background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent 70%);
+        }
+      }
+    }
+  }
+  
+  // Animation handling
+  .animate-on-scroll {
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    
+    &[data-id="benefit-1"] {
+      transition-delay: 0.1s;
+    }
+    
+    &[data-id="benefit-2"] {
+      transition-delay: 0.2s;
+    }
+    
+    &[data-id="benefit-3"] {
+      transition-delay: 0.3s;
+    }
+    
+    &[data-id="benefit-4"] {
+      transition-delay: 0.4s;
+    }
+    
+    &[data-id="faq-1"] {
+      transition-delay: 0.1s;
+    }
+    
+    &[data-id="faq-2"] {
+      transition-delay: 0.2s;
+    }
+    
+    &[data-id="faq-3"] {
+      transition-delay: 0.3s;
+    }
+    
+    &[data-id="faq-4"] {
+      transition-delay: 0.4s;
+    }
+  }
+}
