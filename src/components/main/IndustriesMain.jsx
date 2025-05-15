@@ -4,7 +4,9 @@ import '../styles/main/industriesmain.scss';
 const IndustriesMain = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [isInView, setIsInView] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRef = useRef(null);
+  const heroRef = useRef(null);
   
   // Industry data
   const industries = [
@@ -167,45 +169,106 @@ const IndustriesMain = () => {
     };
   }, []);
   
+  // Handle mouse movement for parallax effect
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: (e.clientX - rect.left) / rect.width,
+          y: (e.clientY - rect.top) / rect.height
+        });
+      }
+    };
+    
+    if (heroRef.current) {
+      heroRef.current.addEventListener('mousemove', handleMouseMove);
+    }
+    
+    return () => {
+      if (heroRef.current) {
+        heroRef.current.removeEventListener('mousemove', handleMouseMove);
+      }
+    };
+  }, []);
+  
+  // Industry card animation
+  const industryCards = [
+    { icon: "shopping_cart", name: "E-Commerce", color: "#F27E63" },
+    { icon: "cloud_done", name: "SaaS", color: "#4F9CF9" },
+    { icon: "account_balance", name: "Finance", color: "#65C466" },
+    { icon: "gavel", name: "Law Firms", color: "#7C5AC7" },
+    { icon: "medical_services", name: "Medical", color: "#42BDC8" },
+    { icon: "home", name: "Real Estate", color: "#F1A036" },
+  ];
+  
   return (
     <main className="industries-main" ref={sectionRef}>
-      {/* Hero Section */}
-      <section className="industries-hero">
-        <div className="container">
-          <div className={`hero-content ${isInView ? 'animate' : ''}`}>
-            <span className="overline">INDUSTRY EXPERTISE</span>
-            <h1 className="hero-title">
-              We Don't Just Understand Your Industry.
-              <span className="highlight"> We Transform It.</span>
-            </h1>
-            <p className="hero-description">
-              WorkZen has engineered growth systems for every major industry, delivering measurable ROI through custom-crafted marketing solutions.
-            </p>
-            <div className="hero-cta">
-              <a href="#industries-tabs" className="btn btn-primary btn-lg">
-                <span>Explore Industries</span>
-              </a>
-              <a href="#contact" className="btn btn-secondary btn-lg">
-                <span>Schedule Consultation</span>
-              </a>
+      {/* Hero Section - REDESIGNED */}
+      <section className="industries-hero" ref={heroRef}>
+        <div className="hero-grid">
+          <div className="hero-content-wrapper">
+            <div className={`hero-content ${isInView ? 'animate' : ''}`}>
+              <div className="hero-badge">
+                <span className="badge-icon material-icons">verified</span>
+                <span className="badge-text">Industry Expertise</span>
+              </div>
+              
+              <h1 className="hero-title">
+                We Don't Just Understand<br />
+                Your Industry.<span className="highlight"> We Transform It.</span>
+              </h1>
+              
+              <p className="hero-description">
+                WorkZen has engineered growth systems for every major industry, delivering measurable ROI through custom-crafted marketing solutions.
+              </p>
+              
+              <div className="hero-cta">
+              <button className="btn btn-primary">
+              <span>Get Started</span>
+            </button>
+            
+            <button className="btn btn-secondary">
+              <span>Our Services</span>
+            </button>
+              </div>
             </div>
           </div>
-          <div className="hero-stats">
-            <div className="stat-item">
-              <span className="stat-number">94%</span>
-              <span className="stat-label">Client Retention</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">78%</span>
-              <span className="stat-label">Average ROI Improvement</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">6+</span>
-              <span className="stat-label">Industry Specializations</span>
+          
+          <div className="hero-visual">
+            <div className="industry-cards-container">
+              {industryCards.map((card, index) => (
+                <div 
+                  key={index}
+                  className="industry-card"
+                  style={{
+                    '--card-delay': `${index * 0.1}s`,
+                    '--card-color': card.color,
+                    transform: isInView ? 
+                      `translate(${(mousePosition.x - 0.5) * -15}px, ${(mousePosition.y - 0.5) * -15}px) rotate(${(index % 2 === 0 ? 1 : -1) * Math.random() * 5}deg)` : 
+                      'translateY(20px)'
+                  }}
+                >
+                  <div className="card-icon">
+                    <span className="material-icons">{card.icon}</span>
+                  </div>
+                  <div className="card-name">{card.name}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+        
+        
+        
         <div className="hero-backdrop"></div>
+        
+        <div className="hero-shapes">
+          <div className="shape shape-1"></div>
+          <div className="shape shape-2"></div>
+          <div className="shape shape-3"></div>
+          <div className="shape shape-4"></div>
+        </div>
       </section>
       
       {/* Industries Tabs Section */}
