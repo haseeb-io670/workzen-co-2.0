@@ -5,6 +5,10 @@ import Services from "../pages/Services.jsx";
 import IndustriesMain from "../pages/IndustriesMain";
 import BlogsPage from "../pages/Blogs";
 import PricingMain from "../components/main/PricingMain";
+import LeadGeneration from "../components/main/Lead-Gen";
+import SEOPage from "../components/main/SEO";
+import DigitalPresence from "../components/main/Digital-Presense";
+import DevelopmentPage from "../components/main/Development.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +34,22 @@ const router = createBrowserRouter([
     path: "/blogs",
     // index:true,
     element: <BlogsPage />
+  },
+  {
+    path: "/lead-generation",
+    element: <LeadGeneration />
+  },
+  {
+    path: "/seo",
+    element: <SEOPage />
+  },
+  {
+    path: "/digital-presence",
+    element: <DigitalPresence />
+  },
+  {
+    path: "/development",
+    element: <DevelopmentPage />
   },
   {
     path: "/services",

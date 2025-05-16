@@ -34,7 +34,7 @@ const ServiceItem = ({ service, closeDropdown }) => {
   return (
     <li className="service-item">
       <a 
-        href={`/services/${service.path}`} 
+        href={`${service.path}`} 
         className="dropdown-item"
         onClick={closeDropdown}
       >
