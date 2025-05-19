@@ -59,16 +59,16 @@ const Footer = () => {
               </ul>
               
               <div className="social-links">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-icon">
+                <a href="https://www.instagram.com/workzenco/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-icon">
                   <img src="/instagram.svg" alt="Instagram" />
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-icon">
+                <a href="https://www.linkedin.com/company/workzen360/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-icon">
                   <img src="/linkedin.svg" alt="LinkedIn" />
                 </a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-icon">
+                <a href="https://www.facebook.com/profile.php?id=61564970678171" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-icon">
                   <img src="/facebook.svg" alt="Facebook" />
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="social-icon">
+                <a href="https://x.com/workzenco" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="social-icon">
                   <img src="/twitter.svg" alt="Twitter" />
                 </a>
               </div>
