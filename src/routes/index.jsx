@@ -9,6 +9,8 @@ import LeadGeneration from "../components/main/Lead-Gen";
 import SEOPage from "../components/main/SEO";
 import DigitalPresence from "../components/main/Digital-Presense";
 import DevelopmentPage from "../components/main/Development.jsx";
+import VirtualAssistant from "../components/main/Virtual-Assistant.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -50,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "/development",
     element: <DevelopmentPage />
+  },
+  {
+    path: "/virtual-assistant",
+    element: <VirtualAssistant />
   },
   {
     path: "/services",
