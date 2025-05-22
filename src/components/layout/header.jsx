@@ -4,30 +4,26 @@ import '../../components/styles/layout/header.scss';
 // Organize services in a 3x2 grid with external SVG files
 const servicesData = [
   {
-    title: "Lead Generation",
-    path: "lead-generation",
-    icon: "/svg/creative-idea.svg"
+    title: "Social Media Management",
+    path: "digital-presence"
   },
   {
-    title: "Development",
-    path: "development",
-    icon: "/svg/development.svg"
+    title: "Web & Platform Development",
+    path: "development"
   },
   {
-    title: "Digital Presence",
-    path: "digital-presence",
-    icon: "/svg/data-analytics.svg"
+    title: "Pay Per Click (PPC)",
+    path: "lead-generation"
   },
   {
-    title: "Virtual Assistant",
-    path: "virtual-assistant",
-    icon: "/svg/virtual-assistant.svg"
+    title: "Search Engine Optimization (SEO)",
+    path: "seo"
   },
   {
-    title: "SEO",
-    path: "seo",
-    icon: "/svg/strategic-plan.svg"
+    title: "Automation and Admin Support",
+    path: "virtual-assistant"
   }
+ 
 ];
 
 const ServiceItem = ({ service, closeDropdown }) => {
@@ -38,10 +34,7 @@ const ServiceItem = ({ service, closeDropdown }) => {
         className="dropdown-item"
         onClick={closeDropdown}
       >
-        <span className="service-icon">
-          <img src={service.icon} alt={service.title} width="20" height="20" />
-        </span>
-        <span>{service.title}</span>
+        {service.title}
       </a>
     </li>
   );
