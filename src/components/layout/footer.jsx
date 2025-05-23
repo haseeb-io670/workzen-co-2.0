@@ -88,11 +88,11 @@ const Footer = () => {
               <div className="footer-nav-column">
                 <h4>Our Services</h4>
                 <ul>
-                  <li><a href="/services/ppc">Lead Generation</a></li>
-                  <li><a href="/services/development">Development</a></li>
-                  <li><a href="/services/digital-presence">Digital Presence</a></li>
-                  <li><a href="/services/virtual-assistant">Virtual Assistant</a></li>
-                  <li><a href="/services/seo">SEO</a></li>
+                  <li><a href="/services/ppc">Pay Per Click (PPC)</a></li>
+                  <li><a href="/services/development">Web & Platform Development</a></li>
+                  <li><a href="/services/social-media">Social Media Management</a></li>
+                  <li><a href="/services/admin-support">Automation and Admin Support</a></li>
+                  <li><a href="/services/seo">Search Engine Optimization (SEO)</a></li>
                 </ul>
               </div>
             </div>
