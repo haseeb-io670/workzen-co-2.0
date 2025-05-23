@@ -136,16 +136,64 @@ const Header = () => {
           </a>
         </div>
 
-        <div className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`} onClick={toggleMobileMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+        {/* Desktop navigation */}
+        <nav className="desktop-navigation">
+          <ul className="nav-list">
+            <li className="nav-item">
+              <a href="/" className="nav-link">Home</a>
+            </li>
+            <li className="nav-item">
+              <a href="/about-us" className="nav-link">About</a>
+            </li>
+            <li 
+              className={`nav-item dropdown ${isServicesDropdownOpen ? 'open' : ''}`} 
+              onMouseEnter={() => handleServicesHover(true)}
+              onMouseLeave={() => handleServicesHover(false)}
+            >
+              <a 
+                href="/services" 
+                className="nav-link dropdown-toggle" 
+                onClick={(e) => e.preventDefault()}
+                aria-expanded={isServicesDropdownOpen}
+                aria-haspopup="true"
+              >
+                Services
+                <svg className="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6">
+                  <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" fill="none" />
+                </svg>
+              </a>
+              <ul className={`dropdown-menu staggered-dropdown ${isServicesDropdownOpen ? 'show' : ''}`}>
+                {servicesData.map((service, index) => (
+                  <ServiceItem 
+                    key={index} 
+                    service={service} 
+                    closeDropdown={closeDropdown}
+                  />
+                ))}
+              </ul>
+            </li>
+            <li className="nav-item">
+              <a href="/pricing" className="nav-link">Pricing</a>
+            </li>
+            <li className="nav-item">
+              <a href="/industries-details" className="nav-link">Industries</a>
+            </li>
+            <li className="nav-item">
+              <a href="/blogs" className="nav-link">Blog</a>
+            </li>
+          </ul>
+        </nav>
 
         <div className="header-actions desktop-only">
           <a href="tel:+14128662284" className="btn-wrapper">
             <button className="glow-button">(412) 866-2284</button>
           </a>
+        </div>
+
+        <div className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`} onClick={toggleMobileMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
       
@@ -207,56 +255,6 @@ const Header = () => {
           </div>
         </nav>
       </div>
-      
-      {/* Desktop navigation */}
-      <nav className="desktop-navigation">
-        <div className="container">
-          <ul className="nav-list">
-            <li className="nav-item">
-              <a href="/" className="nav-link">Home</a>
-            </li>
-            <li className="nav-item">
-              <a href="/about-us" className="nav-link">About</a>
-            </li>
-            <li 
-              className={`nav-item dropdown ${isServicesDropdownOpen ? 'open' : ''}`} 
-              onMouseEnter={() => handleServicesHover(true)}
-              onMouseLeave={() => handleServicesHover(false)}
-            >
-              <a 
-                href="/services" 
-                className="nav-link dropdown-toggle" 
-                onClick={(e) => e.preventDefault()}
-                aria-expanded={isServicesDropdownOpen}
-                aria-haspopup="true"
-              >
-                Services
-                <svg className="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6">
-                  <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" fill="none" />
-                </svg>
-              </a>
-              <ul className={`dropdown-menu staggered-dropdown ${isServicesDropdownOpen ? 'show' : ''}`}>
-                {servicesData.map((service, index) => (
-                  <ServiceItem 
-                    key={index} 
-                    service={service} 
-                    closeDropdown={closeDropdown}
-                  />
-                ))}
-              </ul>
-            </li>
-            <li className="nav-item">
-              <a href="/pricing" className="nav-link">Pricing</a>
-            </li>
-            <li className="nav-item">
-              <a href="/industries-details" className="nav-link">Industries</a>
-            </li>
-            <li className="nav-item">
-              <a href="/blogs" className="nav-link">Blog</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
     </header>
   );
 };
