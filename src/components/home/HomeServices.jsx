@@ -197,15 +197,7 @@ const HomeServices = () => {
             </div>
           </div>
           
-          <div className="services-cta">
-            <div className="cta-content">
-              <h3>Ready to Elevate Your Business?</h3>
-              <p>Let's discuss how our services can be tailored to your specific needs</p>
-            </div>
-            <button className="btn btn-secondary btn-lg btn-rounded">
-              <span>Schedule a Consultation</span>
-            </button>
-          </div>
+        
         </div>
       </div>
       
