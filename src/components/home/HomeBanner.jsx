@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/home/homebanner.scss';
 
 const HomeBanner = () => {
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [currentWord, setCurrentWord] = useState(0);
   const [size, setSize] = useState({ columns: 0, rows: 0 });
@@ -144,11 +146,17 @@ const HomeBanner = () => {
           </div>
           
           <div className={`button-group ${isVisible ? 'slide-in' : ''}`}>
-            <button className="btn btn-primary">
+            <button 
+              className="btn btn-primary"
+              onClick={() => navigate('/contact')}
+            >
               <span>Get Started</span>
             </button>
             
-            <button className="btn btn-secondary">
+            <button 
+              className="btn btn-secondary"
+              onClick={() => navigate('/services')}
+            >
               <span>Our Services</span>
             </button>
           </div>

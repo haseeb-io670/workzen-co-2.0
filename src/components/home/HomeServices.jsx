@@ -16,15 +16,15 @@ const HomeServices = () => {
           <polyline points="17 6 23 6 23 12"></polyline>
         </svg>
       ),
-      title: "Lead Generation",
+      title: "Pay Per Click",
       description: "Generate high-quality leads through targeted campaigns and proven strategies.",
       image: "/service/lead-generation.webp",
       subServices: [
-        "Data Extraction",
-        "Cold Calling",
-        "Email and SMS Marketing",
-        "PPC (Google and Meta Ads)",
-        "Social Media Paid Campaigns"
+        "Search Ads",
+        "Social Media Ads",
+        "Display Network",
+        "Remarketing",
+        "Conversion Rate Optimization"
       ]
     },
     {
@@ -54,7 +54,7 @@ const HomeServices = () => {
           <line x1="12" y1="17" x2="12" y2="21"></line>
         </svg>
       ),
-      title: "Digital Presence",
+      title: "Social Media Management",
       description: "Build a strong online presence that attracts and engages your target audience.",
       image: "/service/digital-presense.webp",
       subServices: [
@@ -93,7 +93,7 @@ const HomeServices = () => {
           <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
         </svg>
       ),
-      title: "Virtual Assistant",
+      title: "Automation & Admin Support",
       description: "Focus on what matters most while our VAs handle the day-to-day operations.",
       image: "/service/virtual-assistant.webp",
       subServices: [
@@ -180,13 +180,7 @@ const HomeServices = () => {
                       ))}
                     </div>
                     
-                    <button className="btn btn-primary btn-rounded">
-                      <span>Get Started</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                      </svg>
-                    </button>
+                  
                   </div>
                   
                   <div className="service-visual">

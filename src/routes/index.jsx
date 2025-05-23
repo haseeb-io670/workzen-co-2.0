@@ -10,6 +10,7 @@ import SEOPage from "../components/main/SEO";
 import DigitalPresence from "../components/main/Digital-Presense";
 import DevelopmentPage from "../components/main/Development.jsx";
 import VirtualAssistant from "../components/main/Virtual-Assistant.jsx";
+import ContactMain from "../components/main/ContactMain";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
     element: <IndustriesMain />
   },
   {
+    path: "/contact",
+    // index:true,
+    element: <ContactMain />
+  },
+  {
     path: "/pricing",
     // index:true,
     element: <PricingMain />
@@ -38,7 +44,7 @@ const router = createBrowserRouter([
     element: <BlogsPage />
   },
   {
-    path: "/lead-generation",
+    path: "/ppc",
     element: <LeadGeneration />
   },
   {
@@ -46,7 +52,7 @@ const router = createBrowserRouter([
     element: <SEOPage />
   },
   {
-    path: "/digital-presence",
+    path: "/social-media",
     element: <DigitalPresence />
   },
   {
@@ -54,7 +60,7 @@ const router = createBrowserRouter([
     element: <DevelopmentPage />
   },
   {
-    path: "/virtual-assistant",
+    path: "/admin-support",
     element: <VirtualAssistant />
   },
   {

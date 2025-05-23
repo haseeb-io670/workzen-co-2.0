@@ -1,107 +1,109 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiDatabase, FiPhone, FiMail, FiSearch, FiUsers } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
+import { FiSearch, FiTrendingUp, FiTarget, FiBarChart2, FiDollarSign, FiUsers } from 'react-icons/fi';
 import '../styles/main/leadgen.scss';
 
 const LeadGeneration = () => {
-  const [activeService, setActiveService] = useState('coldCalling');
+  const navigate = useNavigate();
+  const [activeService, setActiveService] = useState('searchAds');
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef(null);
   
   const services = [
     {
-      id: 'dataExtraction',
-      icon: <FiDatabase size={24} />,
-      title: "Data Extraction",
-      description: "Automated collection of targeted business data from various sources, providing you with accurate contact information and intelligence to fuel your outreach campaigns.",
-      features: [
-        "Custom scraping solutions for industry-specific data",
-        "Data cleaning and verification processes",
-        "Integration with your CRM system",
-        "Regular updates to maintain data freshness",
-        "Compliance with data protection regulations"
-      ],
-      benefits: [
-        "Access to high-quality, targeted prospect data",
-        "Reduced time spent on manual research",
-        "Improved contact accuracy rates",
-        "Scalable data collection for growing businesses"
-      ]
-    },
-    {
-      id: 'coldCalling',
-      icon: <FiPhone size={24} />,
-      title: "Cold Calling",
-      description: "Professional outreach to potential customers through trained sales representatives who engage prospects with personalized pitches aligned with your business objectives.",
-      features: [
-        "Dedicated team of trained callers",
-        "Customized call scripts and pitches",
-        "Scheduled follow-ups to nurture leads",
-        "Detailed reporting and call recordings",
-        "Real-time campaign adjustments"
-      ],
-      benefits: [
-        "Direct communication with decision-makers",
-        "Immediate feedback and objection handling",
-        "Personalized conversations with prospects",
-        "Higher conversion rates than digital-only approaches"
-      ]
-    },
-    {
-      id: 'emailMarketing',
-      icon: <FiMail size={24} />,
-      title: "Email and SMS Marketing",
-      description: "Strategic communication campaigns delivered through email and text messaging with personalized content, automated workflows, and performance tracking.",
-      features: [
-        "Personalized messaging sequences",
-        "A/B testing for optimal performance",
-        "Automated follow-up workflows",
-        "Engagement tracking and analytics",
-        "Mobile-optimized designs"
-      ],
-      benefits: [
-        "Wide reach across multiple channels",
-        "Cost-effective lead nurturing",
-        "Measurable results and ROI tracking",
-        "Scalable for campaigns of any size"
-      ]
-    },
-    {
-      id: 'ppcAds',
+      id: 'searchAds',
       icon: <FiSearch size={24} />,
-      title: "PPC (Google and Meta Ads)",
-      description: "Targeted pay-per-click advertising on Google and social media platforms with optimized ad copy, audience targeting, and conversion tracking to maximize your ad spend.",
+      title: "Search Ads",
+      description: "Maximize visibility in search engine results with targeted Google Ads campaigns that capture high-intent users actively searching for your products or services.",
       features: [
-        "Strategic keyword research and selection",
-        "Custom ad creation and copywriting",
-        "Landing page optimization",
-        "Budget management and bid strategies",
-        "Regular performance analysis"
+        "Comprehensive keyword research and selection",
+        "Strategic bid management and budget allocation",
+        "Compelling ad copy with strong CTAs",
+        "Negative keyword strategy to reduce wasted spend",
+        "Performance tracking and conversion optimization"
       ],
       benefits: [
-        "Immediate visibility in search results",
-        "Precise audience targeting capabilities",
-        "Flexible budgeting with controlled spending",
-        "Fast testing and optimization cycles"
+        "Reach customers at the moment they're searching",
+        "Pay only when someone clicks your ad",
+        "Target specific locations and devices",
+        "Measure ROI with conversion tracking"
       ]
     },
     {
-      id: 'socialMedia',
-      icon: <FiUsers size={24} />,
-      title: "Social Media Paid Campaigns",
-      description: "Strategic paid promotions across social media platforms with specific audience targeting, creative ad formats, and performance optimization to generate quality leads.",
+      id: 'displayNetwork',
+      icon: <FiTrendingUp size={24} />,
+      title: "Display Network",
+      description: "Expand your reach with visually engaging banner and video ads across millions of websites, apps, and videos in the Google Display Network.",
       features: [
-        "Platform-specific campaign strategies",
-        "Custom audience creation and targeting",
-        "Creative ad design and copywriting",
-        "Conversion tracking implementation",
-        "Continuous optimization for performance"
+        "Eye-catching display ad creation",
+        "Contextual and audience-based targeting",
+        "Remarketing to previous visitors",
+        "Responsive ad designs for all devices",
+        "Detailed performance analytics"
       ],
       benefits: [
-        "Highly targeted demographic reaching",
-        "Engaging visual and interactive formats",
-        "Advanced retargeting capabilities",
-        "Brand awareness alongside lead generation"
+        "Build brand awareness at scale",
+        "Visual format increases engagement",
+        "Reach potential customers across the web",
+        "Multiple ad formats to choose from"
+      ]
+    },
+    {
+      id: 'socialMediaAds',
+      icon: <FiUsers size={24} />,
+      title: "Social Media Ads",
+      description: "Leverage the power of social platforms like Facebook, Instagram, and LinkedIn to target specific demographics and interests with precision.",
+      features: [
+        "Platform-specific ad campaign setup",
+        "Advanced audience targeting options",
+        "Engaging ad creatives and copy",
+        "Retargeting website visitors",
+        "Performance monitoring and optimization"
+      ],
+      benefits: [
+        "Reach highly targeted audiences",
+        "Multiple ad formats (image, video, carousel)",
+        "Strong engagement and shareability",
+        "Detailed demographic insights"
+      ]
+    },
+    {
+      id: 'remarketing',
+      icon: <FiTarget size={24} />,
+      title: "Remarketing",
+      description: "Reconnect with visitors who left your website without converting by showing them relevant ads as they browse other websites.",
+      features: [
+        "Custom audience segmentation",
+        "Dynamic remarketing for e-commerce",
+        "Customizable ad frequency capping",
+        "Cross-device remarketing",
+        "Conversion tracking and attribution"
+      ],
+      benefits: [
+        "Higher conversion rates than cold traffic",
+        "Increased brand recall",
+        "Personalized ad experiences",
+        "Efficient use of ad spend"
+      ]
+    },
+    {
+      id: 'performance',
+      icon: <FiBarChart2 size={24} />,
+      title: "Performance Analytics",
+      description: "Comprehensive tracking and reporting to measure the effectiveness of your PPC campaigns and optimize for better results.",
+      features: [
+        "Conversion tracking setup",
+        "Custom dashboard and reports",
+        "A/B testing of ads and landing pages",
+        "ROI and revenue attribution",
+        "Monthly performance reviews"
+      ],
+      benefits: [
+        "Data-driven decision making",
+        "Clear visibility into campaign performance",
+        "Continuous optimization opportunities",
+        "Maximized return on ad spend"
       ]
     }
   ];
@@ -143,7 +145,7 @@ const LeadGeneration = () => {
               animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Lead Generation
+              PPC Advertising
             </motion.div>
             
             <motion.h1 
@@ -152,7 +154,7 @@ const LeadGeneration = () => {
               animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 30 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Drive Business Growth With <br/><span className="highlight">Lead Generation</span> Strategies
+              Drive Qualified Traffic With <br/><span className="highlight">Targeted PPC</span> Campaigns
             </motion.h1>
             
             <motion.p 
@@ -161,7 +163,7 @@ const LeadGeneration = () => {
               animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 30 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Our Lead Generation strategies help businesses acquire qualified prospects, fill your sales pipeline, and drive revenue growth through targeted approaches.
+              Our expert PPC management ensures your ads reach the right audience at the right time, maximizing conversions and delivering measurable ROI for your business.
             </motion.p>
           </div>
           
@@ -245,7 +247,10 @@ const LeadGeneration = () => {
               </div>
               
               <div className="service-actions">
-                <button className="btn btn-primary btn-rounded">
+                <button 
+                  className="btn btn-primary btn-rounded"
+                  onClick={() => navigate('/contact')}
+                >
                   <span>Get Started With {activeServiceData.title}</span>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -253,7 +258,10 @@ const LeadGeneration = () => {
                   </svg>
                 </button>
                 
-                <button className="btn btn-secondary btn-rounded">
+                <button 
+                  className="btn btn-secondary btn-rounded"
+                  onClick={() => navigate('/contact')}
+                >
                   <span>Schedule a Consultation</span>
                 </button>
               </div>
@@ -261,14 +269,14 @@ const LeadGeneration = () => {
           </div>
           
           <div className="process-section">
-            <h2>Our Lead Generation Process</h2>
+            <h2>Our PPC Process</h2>
             
             <div className="process-timeline">
               <div className="process-step">
                 <div className="step-number">01</div>
                 <div className="step-content">
                   <h3>Strategy Development</h3>
-                  <p>We analyze your business goals, target audience, and market position to develop a customized lead generation strategy.</p>
+                  <p>We analyze your business goals, target audience, and market position to develop a customized PPC strategy.</p>
                 </div>
               </div>
               
@@ -301,15 +309,21 @@ const LeadGeneration = () => {
           <div className="cta-section">
             <div className="cta-content">
               <h2>Ready to Generate Quality Leads?</h2>
-              <p>Let's discuss how our lead generation services can help your business grow.</p>
+              <p>Let's discuss how our PPC services can help your business grow.</p>
             </div>
             
             <div className="cta-buttons">
-              <button className="btn btn-primary btn-lg btn-rounded">
+              <button 
+                className="btn btn-primary btn-lg btn-rounded"
+                onClick={() => navigate('/contact')}
+              >
                 <span>Book a Strategy Call</span>
               </button>
               
-              <button className="btn btn-secondary btn-lg btn-rounded">
+              <button 
+                className="btn btn-secondary btn-lg btn-rounded"
+                onClick={() => navigate('/pricing')}
+              >
                 <span>View Pricing</span>
               </button>
             </div>

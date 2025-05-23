@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import '../../components/styles/layout/header.scss';
 
-// Organize services in a 3x2 grid with external SVG files
 const servicesData = [
   {
     title: "Social Media Management",
-    path: "digital-presence"
+    path: "social-media"
   },
   {
     title: "Web & Platform Development",
@@ -13,7 +12,7 @@ const servicesData = [
   },
   {
     title: "Pay Per Click (PPC)",
-    path: "lead-generation"
+    path: "ppc"
   },
   {
     title: "Search Engine Optimization (SEO)",
@@ -21,18 +20,25 @@ const servicesData = [
   },
   {
     title: "Automation and Admin Support",
-    path: "virtual-assistant"
+    path: "admin-support"
   }
  
 ];
 
 const ServiceItem = ({ service, closeDropdown }) => {
+  const handleClick = (e) => {
+    // Close the dropdown menu when a service item is clicked
+    closeDropdown();
+    // On mobile, we also want to close the mobile menu
+    document.querySelector('.main-navigation').classList.remove('mobile-menu-open');
+  };
+
   return (
     <li className="service-item">
       <a 
-        href={`${service.path}`} 
+        href={`/${service.path}`} 
         className="dropdown-item"
-        onClick={closeDropdown}
+        onClick={handleClick}
       >
         {service.title}
       </a>
@@ -44,8 +50,10 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const servicesDropdownRef = useRef(null);
   const isMobile = useRef(window.innerWidth <= 991);
+  const navRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,7 +65,19 @@ const Header = () => {
     };
 
     const handleResize = () => {
-      isMobile.current = window.innerWidth <= 991;
+      const width = window.innerWidth;
+      setWindowWidth(width);
+      isMobile.current = width <= 991;
+      
+      // Close mobile menu if window is resized to desktop
+      if (width > 991 && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+      
+      // Close services dropdown when resizing
+      if (isServicesDropdownOpen) {
+        setIsServicesDropdownOpen(false);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -86,16 +106,15 @@ const Header = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+    // Always close the services dropdown when toggling mobile menu
     if (isServicesDropdownOpen) {
       setIsServicesDropdownOpen(false);
     }
   };
 
   const handleServicesClick = (e) => {
-    if (isMobile.current) {
-      e.preventDefault();
-      setIsServicesDropdownOpen(!isServicesDropdownOpen);
-    }
+    e.preventDefault();
+    setIsServicesDropdownOpen(!isServicesDropdownOpen);
   };
 
   const handleServicesHover = (isHovering) => {
@@ -109,7 +128,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`site-header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`site-header ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'menu-open' : ''}`}>
       <div className="container header-container">
         <div className="logo-container">
           <a href="/" className="logo">
@@ -117,13 +136,81 @@ const Header = () => {
           </a>
         </div>
 
-        <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+        <div className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`} onClick={toggleMobileMenu}>
           <span></span>
           <span></span>
           <span></span>
         </div>
 
-        <nav className={`main-navigation ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
+        <div className="header-actions desktop-only">
+          <a href="tel:+14128662284" className="btn-wrapper">
+            <button className="glow-button">(412) 866-2284</button>
+          </a>
+        </div>
+      </div>
+      
+      {/* Full-screen mobile navigation */}
+      <div className={`mobile-nav-overlay ${isMobileMenuOpen ? 'active' : ''}`}>
+        <nav className={`main-navigation ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`} ref={navRef}>
+          <div className="mobile-nav-container">
+            <ul className="nav-list">
+              <li className="nav-item">
+                <a href="/" className="nav-link" onClick={toggleMobileMenu}>Home</a>
+              </li>
+              <li className="nav-item">
+                <a href="/about-us" className="nav-link" onClick={toggleMobileMenu}>About</a>
+              </li>
+              <li 
+                className={`nav-item dropdown ${isServicesDropdownOpen ? 'open' : ''}`} 
+                ref={servicesDropdownRef}
+              >
+                <div 
+                  className="nav-link dropdown-toggle" 
+                  onClick={handleServicesClick}
+                  aria-expanded={isServicesDropdownOpen}
+                  aria-haspopup="true"
+                >
+                  Services
+                  <svg className="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6">
+                    <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" fill="none" />
+                  </svg>
+                </div>
+                <ul className={`dropdown-menu ${isServicesDropdownOpen ? 'show' : ''}`}>
+                  {servicesData.map((service, index) => (
+                    <ServiceItem 
+                      key={index} 
+                      service={service} 
+                      closeDropdown={closeDropdown}
+                    />
+                  ))}
+                </ul>
+              </li>
+              <li className="nav-item">
+                <a href="/pricing" className="nav-link" onClick={toggleMobileMenu}>Pricing</a>
+              </li>
+              <li className="nav-item">
+                <a href="/industries-details" className="nav-link" onClick={toggleMobileMenu}>Industries</a>
+              </li>
+              <li className="nav-item">
+                <a href="/blogs" className="nav-link" onClick={toggleMobileMenu}>Blog</a>
+              </li>
+            </ul>
+            
+            <div className="mobile-header-actions">
+              <a href="/contact" className="btn-wrapper">
+                <button className="btn-primary mobile-cta">Contact Us</button>
+              </a>
+              <a href="tel:+14128662284" className="btn-wrapper">
+                <button className="btn-secondary mobile-cta">(412) 866-2284</button>
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+      
+      {/* Desktop navigation */}
+      <nav className="desktop-navigation">
+        <div className="container">
           <ul className="nav-list">
             <li className="nav-item">
               <a href="/" className="nav-link">Home</a>
@@ -133,14 +220,13 @@ const Header = () => {
             </li>
             <li 
               className={`nav-item dropdown ${isServicesDropdownOpen ? 'open' : ''}`} 
-              ref={servicesDropdownRef}
               onMouseEnter={() => handleServicesHover(true)}
               onMouseLeave={() => handleServicesHover(false)}
             >
               <a 
                 href="/services" 
                 className="nav-link dropdown-toggle" 
-                onClick={handleServicesClick}
+                onClick={(e) => e.preventDefault()}
                 aria-expanded={isServicesDropdownOpen}
                 aria-haspopup="true"
               >
@@ -168,16 +254,9 @@ const Header = () => {
             <li className="nav-item">
               <a href="/blogs" className="nav-link">Blog</a>
             </li>
-            
           </ul>
-        </nav>
-
-        <div className="header-actions">
-          <a href="tel:+14128662284" className="btn-wrapper">
-            <button className="glow-button">(412) 866-2284</button>
-          </a>
         </div>
-      </div>
+      </nav>
     </header>
   );
 };

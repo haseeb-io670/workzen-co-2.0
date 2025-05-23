@@ -447,7 +447,8 @@ const SEOPage = () => {
                 </div>
                 
                 <div className="service-detail-cta">
-                  <button className="btn-service-action">
+                  <button className="btn-service-action"
+                  onClick={() => window.location.href = '/contact'}>
                     <span>Get Started with {seoServices[activeService].title}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 12h14"></path>
@@ -576,13 +577,15 @@ const SEOPage = () => {
                 <p>Let's create an SEO strategy tailored to your business goals and industry needs.</p>
                 
                 <div className="cta-buttons">
-                  <button className="btn btn-primary btn-glow">
+                  <button className="btn btn-primary btn-glow"
+                  onClick={() => window.location.href = '/contact'}>
                     <span>Get a Free SEO Audit</span>
                     <div className="btn-particles"></div>
                   </button>
                   
-                  <button className="btn btn-secondary btn-outline">
-                    <span>Schedule a Call</span>
+                  <button className="btn btn-secondary btn-outline"
+                  onClick={() => window.location.href = '/pricing'}>
+                    <span>Get Pricing</span>
                   </button>
                 </div>
               </div>

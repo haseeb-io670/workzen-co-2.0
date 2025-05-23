@@ -88,7 +88,7 @@ const Footer = () => {
               <div className="footer-nav-column">
                 <h4>Our Services</h4>
                 <ul>
-                  <li><a href="/services/lead-generation">Lead Generation</a></li>
+                  <li><a href="/services/ppc">Lead Generation</a></li>
                   <li><a href="/services/development">Development</a></li>
                   <li><a href="/services/digital-presence">Digital Presence</a></li>
                   <li><a href="/services/virtual-assistant">Virtual Assistant</a></li>

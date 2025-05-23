@@ -9,29 +9,29 @@ const ServiceMain = () => {
   const services = [
     {
       id: 1,
-      title: "Lead Generation",
+      title: "Pay Per Click (PPC)",
       path: "lead-generation",
       category: "marketing",
       icon: "/svg/lead-generation.svg",
       description: "Attract high-quality leads with our targeted campaigns and data-driven strategies.",
       bulletPoints: [
-        "Data Extraction",
-        "Cold Calling",
+        "Google Ads",
+        "Meta Ads",
         "Email and SMS Marketing",
         "PPC (Google and Meta Ads)",
         "Social Media Paid Campaigns"
       ],
       features: [
-        "Data Extraction & Analysis",
-        "Cold Calling Campaigns",
-        "Email & SMS Marketing",
-        "PPC Advertising",
+        "Google Ads",
+        "Meta Ads",
+        "Email and SMS Marketing",
+        "PPC (Google and Meta Ads)",
         "Social Media Campaigns"
       ]
     },
     {
       id: 2,
-      title: "Development",
+      title: "Web & Platform Development",
       path: "development",
       category: "tech",
       icon: "/svg/development.svg",
@@ -52,7 +52,7 @@ const ServiceMain = () => {
     },
     {
       id: 3,
-      title: "Digital Presence",
+      title: "Social Media Management",
       path: "digital-presence",
       category: "marketing",
       icon: "/svg/digital.svg",
@@ -94,7 +94,7 @@ const ServiceMain = () => {
     },
     {
       id: 5,
-      title: "Virtual Assistant",
+      title: "Automation and Admin Support",
       path: "virtual-assistant",
       category: "support",
       icon: "/svg/va.svg",

@@ -124,7 +124,7 @@ const VirtualAssistant = () => {
               animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Virtual Assistant Services
+              Automation & Admin Support 
             </motion.div>
             
             <motion.h1 
@@ -133,7 +133,7 @@ const VirtualAssistant = () => {
               animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 30 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Streamline Your Operations With <br/><span className="highlight">Virtual Assistant</span> Solutions
+              Streamline Your Operations With <br/><span className="highlight">Automation</span> Solutions
             </motion.h1>
             
             <motion.p 
@@ -142,7 +142,7 @@ const VirtualAssistant = () => {
               animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 30 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Our Virtual Assistant solutions help businesses streamline operations, save time, and focus on core activities by handling administrative tasks efficiently.
+              Our Automation & Admin Support solutions help businesses streamline operations, save time, and focus on core activities by handling administrative tasks efficiently.
             </motion.p>
           </div>
           
@@ -308,7 +308,7 @@ const VirtualAssistant = () => {
               animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 30 }}
               transition={{ duration: 0.6, delay: 0.9 }}
             >
-              Start optimizing your business operations today with our Virtual Assistant services.
+              Start optimizing your business operations today with our Automation & Admin Support services.
             </motion.p>
           </div>
           <motion.div
@@ -317,10 +317,12 @@ const VirtualAssistant = () => {
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 30 }}
             transition={{ duration: 0.6, delay: 1 }}
           >
-            <button className="btn btn-primary btn-lg btn-rounded">
+            <button className="btn btn-primary btn-lg btn-rounded"
+            onClick={() => window.location.href = '/contact'}>
               <span>Start a Project</span>
             </button>
-            <button className="btn btn-secondary btn-lg btn-rounded">
+            <button className="btn btn-secondary btn-lg btn-rounded"
+            onClick={() => window.location.href = '/contact'}>
               <span>Book a Call</span>
             </button>
           </motion.div>
