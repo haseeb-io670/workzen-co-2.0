@@ -184,6 +184,23 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
         box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
       }
       
+      .form-status {
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        
+        &.success {
+          background: rgba(#00C288, 0.1);
+          color: #00C288;
+        }
+        
+        &.error {
+          background: rgba(#FF3A5E, 0.1);
+          color: #FF3A5E;
+        }
+      }
+
       .form-header {
         padding: 30px;
         background: linear-gradient(135deg, $primary-color, $primary-dark);
@@ -212,6 +229,34 @@ $secondary-dark: var(--color-secondary-dark, #15304D);
       .contact-form {
         padding: 30px;
         
+        .loading {
+          opacity: 0.8;
+          cursor: not-allowed;
+        }
+        
+        .loading::after {
+          content: '';
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          top: 50%;
+          left: 50%;
+          margin: -10px 0 0 -10px;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          border-top-color: #fff;
+          border-radius: 50%;
+          animation: button-loading-spinner 0.8s linear infinite;
+        }
+        
+        @keyframes button-loading-spinner {
+          from {
+            transform: rotate(0turn);
+          }
+          to {
+            transform: rotate(1turn);
+          }
+        }
+
         .form-group {
           margin-bottom: 20px;
           position: relative;

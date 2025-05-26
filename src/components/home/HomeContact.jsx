@@ -11,6 +11,11 @@ const HomeContact = () => {
     subject: '',
     message: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState({
+    success: '',
+    message: '',
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,22 +25,67 @@ const HomeContact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Here you would typically send the form data to your backend
-    
-    // Reset form after submission
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    });
-    
-    // Show success message
-    alert('Your message has been sent. We will contact you soon!');
+    setIsLoading(true);
+    setResponseMessage(null);
+
+    try {  
+      // Validate required fields
+      const requiredFields = ['name', 'email', 'phone', 'subject', 'message'];
+      const missingFields = requiredFields.filter(field => !formData[field]);
+      
+      // console.log(missingFields.length);
+      // console.log(requiredFields.filter(field => !formData[field]));
+      if (missingFields.length > 0) {
+        setResponseMessage({
+          success: false,
+          message: `Missing required fields: ${missingFields.join(', ')}`
+        });
+      }
+  
+      const apiUrl = import.meta.env.VITE_PUBLIC_LARAVEL_API_URL;
+      
+      if (!apiUrl) {
+        throw new Error('API URL is not configured');
+      }
+  
+      const response = await fetch(`${apiUrl}/contact/submit`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const responseData = await response.json();
+      console.log(responseData);
+      
+      if (!responseData.success) {
+        throw new Error(responseData.message || 'Failed to submit contact form');
+      }
+
+      setResponseMessage({
+        success: responseData.success,
+        message: responseData.message,
+      });
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+    } catch (error) {
+        setResponseMessage({
+          success: false,
+          message: error instanceof Error ? error.message : 'An error occurred while submitting the form'
+        });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -81,7 +131,11 @@ const HomeContact = () => {
               <div className="form-header">
                 <h3>Leave A Message</h3>
               </div>
-              
+              {responseMessage && (
+                <div className={`form-status ${responseMessage.success ? 'success' : 'error'}`}>
+                  {responseMessage.message}
+                </div>
+              )}
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="form-group">
                   <input 
@@ -92,6 +146,7 @@ const HomeContact = () => {
                     required 
                     value={formData.name}
                     onChange={handleChange}
+                    disabled={isLoading}
                   />
                   <label htmlFor="name">Your Name*</label>
                 </div>
@@ -106,6 +161,7 @@ const HomeContact = () => {
                       required 
                       value={formData.email}
                       onChange={handleChange}
+                      disabled={isLoading}
                     />
                     <label htmlFor="email">Email Address*</label>
                   </div>
@@ -118,6 +174,7 @@ const HomeContact = () => {
                       placeholder=" " 
                       value={formData.phone}
                       onChange={handleChange}
+                      disabled={isLoading}
                     />
                     <label htmlFor="phone">Phone Number</label>
                   </div>
@@ -132,6 +189,7 @@ const HomeContact = () => {
                     required 
                     value={formData.subject}
                     onChange={handleChange}
+                    disabled={isLoading}
                   />
                   <label htmlFor="subject">Subject*</label>
                 </div>
@@ -145,16 +203,23 @@ const HomeContact = () => {
                     rows="5"
                     value={formData.message}
                     onChange={handleChange}
+                    disabled={isLoading}
                   ></textarea>
                   <label htmlFor="message">Your Message*</label>
                 </div>
                 
-                <button type="submit" className="btn btn-primary btn-rounded">
-                  <span>Send Message</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
+                <button type="submit" className={`btn btn-primary btn-rounded ${isLoading ? 'loading' : ''}`}
+                  disabled={isLoading}
+                >
+                  {!isLoading && (
+                    <>
+                      <span>Send Message</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </>
+                  )}
                 </button>
               </form>
             </div>
