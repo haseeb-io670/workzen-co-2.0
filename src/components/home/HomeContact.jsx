@@ -28,7 +28,10 @@ const HomeContact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setResponseMessage(null);
+    setResponseMessage({
+      success: false,
+      message: '',
+    });
 
     try {  
       // Validate required fields
