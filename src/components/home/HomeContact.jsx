@@ -13,7 +13,7 @@ const HomeContact = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState({
-    success: '',
+    success: false,
     message: '',
   });
 
@@ -131,7 +131,7 @@ const HomeContact = () => {
               <div className="form-header">
                 <h3>Leave A Message</h3>
               </div>
-              {responseMessage && (
+              {responseMessage.success && (
                 <div className={`form-status ${responseMessage.success ? 'success' : 'error'}`}>
                   {responseMessage.message}
                 </div>
