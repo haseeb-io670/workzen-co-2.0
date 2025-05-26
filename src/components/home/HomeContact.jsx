@@ -131,7 +131,7 @@ const HomeContact = () => {
               <div className="form-header">
                 <h3>Leave A Message</h3>
               </div>
-              {responseMessage.success && (
+              {responseMessage && (
                 <div className={`form-status ${responseMessage.success ? 'success' : 'error'}`}>
                   {responseMessage.message}
                 </div>
